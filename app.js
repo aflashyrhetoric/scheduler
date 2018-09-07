@@ -70,8 +70,11 @@ let Hampton = {
   ],
 }
 let Pittsburgh = Object.assign({}, Hampton);
+Pittsburgh.name = 'Pittsburgh';
 let Temple = Object.assign({}, Hampton);
+Temple.name = 'Temple';
 let Maryland = {
+  name: 'Maryland',
   slots: [
     new Writing(8, 55),
     new Reading(11, 0),
@@ -80,6 +83,7 @@ let Maryland = {
   ],
 };
 let USC = {
+  name: 'USC',
   slots: [
     new Writing(8, 2, 50),
     new Wheatley(8, 55),
@@ -88,6 +92,7 @@ let USC = {
   ],
 };
 let Albany = {
+  name: 'Albany',
   slots: [
     new Wheatley(8, 2),
     new Reading(11, 0),
@@ -96,13 +101,14 @@ let Albany = {
   ],
 };
 
-colleges.push(Hampton, Pittsburgh, Temple, Maryland);
+colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
 colleges.forEach( college => {
-  console.log('\n');
+  console.log(`${college.name}`);
   college.slots.forEach(timeSlot => {
     console.log(timeSlot);
   });
+  console.log('\n');
 })
 
 
