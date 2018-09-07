@@ -1,0 +1,73 @@
+students:
+- name: Rivah Church
+  college: USC
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Salia Fofana
+  college: Lehman
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Jacob Hernandez
+  college: Hampton
+  mandates:
+  - groupLimit: 1
+  - groupLimit: 2
+- name: Heaven Rivera
+  college: Hampton
+  mandates:
+  - groupLimit: 2
+- name: Dallas Wiggins
+  college: Pittsburg
+  mandates:
+  - groupLimit: 2
+- name: Fraymer Estrella
+  college: Hampton
+  mandates:
+  - groupLimit: 3
+  - groupLimit: 3
+- name: Hamani Adam
+  college: Maryland
+  mandates:
+  - groupLimit: 1
+  - groupLimit: 2
+- name: Shawn Bradberry
+  college: USC
+  mandates:
+  - groupLimit: 1
+  - groupLimit: 2
+- name: Coleman Brown
+  college: Albany
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Ja'miya Brown
+  college: Albany
+  mandates:
+  - groupLimit: 3
+  - groupLimit: 3
+- name: Jordan Djomambo
+  college: Albany
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Christian Fraser
+  college: USC
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Luis Garcia
+  college: Maryland
+  mandates:
+  - groupLimit: 1
+  - groupLimit: 2
+- name: Kajohn Grandison
+  college: USC
+  mandates:
+  - groupLimit: 2
+  - groupLimit: 2
+- name: Andrew Hood
+  college: USC
+  mandates:
+  - groupLimit: 2

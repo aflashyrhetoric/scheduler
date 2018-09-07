@@ -9,14 +9,32 @@ let config = {
   },
   plugins: [],
   module: {
-    rules: [{
+    rules: [
+    {
       test: /\.js$/,
       exclude: [/node_modules/],
       use: [
         {
           loader: 'babel-loader',
         }]
-    }]
+    },
+    {
+      test: /\.json$/,
+      exclude: [/node_modules/],
+      use: [
+        {
+          loader: 'json-loader',
+        }]
+    },
+    {
+      test: /\.yaml$/,
+      use: [
+        {
+          loader: 'yaml-js-loader',
+        }
+      ]
+    },
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss']

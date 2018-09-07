@@ -1,5 +1,8 @@
-const HOUR = 60;
+// import studentList from './students.yaml';
+const studentList = require("!json-loader!./students.yaml");
+
 let colleges = [];
+const HOUR = 60;
 
 class Time {
   constructor(hours, minutes) {
@@ -103,14 +106,20 @@ let Albany = {
 
 colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
-colleges.forEach( college => {
-  console.log(`${college.name}`);
-  college.slots.forEach(timeSlot => {
-    console.log(timeSlot);
-  });
-  console.log('\n');
+/////////
+
+studentList.forEach( student => {
+  console.log(student.name);
 })
 
 
-// console.log(pp(Hampton.classes[0].endTime));
+// colleges.forEach( college => {
+//   console.log(`${college.name}`);
+//   college.slots.forEach(timeSlot => {
+//     console.log(timeSlot);
+//   });
+//   console.log('\n');
+// })
+
+
 
