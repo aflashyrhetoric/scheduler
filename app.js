@@ -82,9 +82,17 @@ let Maryland = {
 let USC = {
   slots: [
     new Writing(8, 2, 50),
-    new Wheatley(1, 15),
+    new Wheatley(8, 55),
+    new SharedText(9, 47, 30),
     new Reading(11, 0),
-    new SharedText(12, 2, 30),
+  ],
+};
+let Albany = {
+  slots: [
+    new Wheatley(8, 2),
+    new Reading(11, 0),
+    new Writing(1, 15, 50),
+    new SharedText(3, 5, 30),
   ],
 };
 
