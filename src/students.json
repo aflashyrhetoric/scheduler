@@ -46,8 +46,20 @@
       ]
     },
     {
+      "name": "Jose Navarrete",
+      "college": "Temple",
+      "mandates": [
+        {
+          "groupLimit": 2
+        },
+        {
+          "groupLimit": 2
+        }
+      ]
+    },
+    {
       "name": "Dallas Wiggins",
-      "college": "Pittsburg",
+      "college": "Pittsburgh",
       "mandates": [
         {
           "groupLimit": 2

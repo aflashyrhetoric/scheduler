@@ -1,5 +1,6 @@
-import studentList from './students';
-// const studentList = require("!json-loader!./students.yaml");
+import studentRoster from './students';
+
+let studentList = studentRoster.students;
 
 let colleges = [];
 const HOUR = 60;
@@ -30,6 +31,10 @@ function pp(time) {
     time.minutes = '00';
   }
   return `${displayHours}:${time.minutes}${AMPM}`;
+}
+
+function flatten(arr1) {
+  return arr1.reduce((acc, val) => acc.concat(val), []);
 }
 
 class Wheatley {
@@ -65,6 +70,7 @@ class SharedText {
 }
 
 let Hampton = {
+  name: "Hampton",
   slots: [
     new Wheatley(8, 10),
     new Reading(11, 0),
@@ -105,14 +111,49 @@ let Albany = {
 };
 
 
-colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
-/////////
+// 6 schools with 4 slots each
+colleges.push(
+  Hampton,
+  Pittsburgh,
+  Temple,
+  Maryland,
+  USC,
+  Albany
+);
 
-studentList.students.forEach( student => {
-  console.log(student.name);
-})
 
+// Add kids to colleges
+colleges.forEach(college => {
+  college.members = [];
+  studentList.forEach(student => {
+    if(college.name == student.college) {
+      college.members.push(student);
+    }
+  })
+  console.log(`${college.name} has ${college.members}`)
+});
+
+/*
+ * Get all time slots
+ */
+
+let allTimeSlots = colleges.map(college => {
+  return college.slots;
+});
+
+allTimeSlots = flatten(allTimeSlots);
+
+/*
+ * Student-related utility functions
+ */
+
+
+// console.log(colleges);
+
+// studentList.forEach( student => {
+//   console.log(student.name);
+// })
 
 // colleges.forEach( college => {
 //   console.log(`${college.name}`);
