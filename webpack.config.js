@@ -4,35 +4,25 @@ const webpack = require('webpack');
 
 let config = {
   mode: "development",
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  },
   output: {
-    filename: 'script.js',
+    globalObject: "this"
   },
   plugins: [],
   module: {
     rules: [
     {
       test: /\.js$/,
-      exclude: [/node_modules/],
-      use: [
-        {
-          loader: 'babel-loader',
-        }]
-    },
-    {
-      test: /\.json$/,
-      exclude: [/node_modules/],
-      use: [
-        {
-          loader: 'json-loader',
-        }]
-    },
-    {
-      test: /\.yaml$/,
-      use: [
-        {
-          loader: 'yaml-js-loader',
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
         }
-      ]
+      }
     },
     ]
   },
@@ -48,19 +38,15 @@ if (process.env.NODE_ENV !== 'production') {
   //
   // Development
   //
-  config.entry = {
-    app: [
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/dev-server',
-      './app.js'
-    ]
-  };
   config.plugins = config.plugins.concat([
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]);
-
-} 
+} else {
+  config.plugins = config.plugins.concat([
+    new webpack.optimize.AggressiveMergingPlugin()
+  ]);
+}
 
 module.exports = config

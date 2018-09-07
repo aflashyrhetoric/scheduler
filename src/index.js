@@ -1,5 +1,5 @@
-// import studentList from './students.yaml';
-const studentList = require("!json-loader!./students.yaml");
+import studentList from './students';
+// const studentList = require("!json-loader!./students.yaml");
 
 let colleges = [];
 const HOUR = 60;
@@ -104,11 +104,12 @@ let Albany = {
   ],
 };
 
+
 colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
 /////////
 
-studentList.forEach( student => {
+studentList.students.forEach( student => {
   console.log(student.name);
 })
 
