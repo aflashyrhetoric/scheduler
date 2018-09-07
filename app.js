@@ -46,15 +46,15 @@ class Reading {
 }
 
 class Writing {
-  constructor(startHour, startMinute) {
+  constructor(startHour, startMinute, duration = 45) {
     this.startTime = new Time(startHour, startMinute);
-    this.duration = 45;
+    this.duration = duration;
     this.endTime = getEnd(this.startTime, this.duration);
   }
 }
 
 class SharedText {
-  constructor(startHour, startMinute, duration) {
+  constructor(startHour, startMinute, duration = 25) {
     this.startTime = new Time(startHour, startMinute);
     this.duration = duration;
     this.endTime = getEnd(this.startTime, this.duration);
@@ -66,16 +66,32 @@ let Hampton = {
     new Wheatley(8, 10),
     new Reading(11, 0),
     new Writing(12, 0),
-    new SharedText(2, 15, 25)
+    new SharedText(2, 15)
   ],
 }
-
 let Pittsburgh = Object.assign({}, Hampton);
 let Temple = Object.assign({}, Hampton);
+let Maryland = {
+  slots: [
+    new Writing(8, 55),
+    new Reading(11, 0),
+    new SharedText(12, 2, 30),
+    new Wheatley(1, 15),
+  ],
+};
+let USC = {
+  slots: [
+    new Writing(8, 2, 50),
+    new Wheatley(1, 15),
+    new Reading(11, 0),
+    new SharedText(12, 2, 30),
+  ],
+};
 
-colleges.push(Hampton, Pittsburgh, Temple);
+colleges.push(Hampton, Pittsburgh, Temple, Maryland);
 
 colleges.forEach( college => {
+  console.log('\n');
   college.slots.forEach(timeSlot => {
     console.log(timeSlot);
   });
