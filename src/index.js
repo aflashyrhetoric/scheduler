@@ -140,10 +140,10 @@ let Albany = {
 colleges.push(
   Hampton,
   Pittsburgh,
-  Temple
-  // Maryland,
-  // USC,
-  // Albany
+  Temple,
+  Maryland,
+  USC,
+  Albany
 );
 
 // Add kids to colleges
@@ -241,15 +241,13 @@ timeslots.forEach(slot => {
       }
     }); // End of currentCollegeStudents forEach
   });
-
-  // console.log(currentCollegeStudents);
-
   // printClassOkverview(allCurrentCourses, slot)
 
   // console.log(slot)
 }); // End of timeslot loop
 
-console.log(JSON.stringify(timeslots, null, 2));
+str(timeslots)
+// str(studentList)
 
 function str(obj) {
   console.log(JSON.stringify(obj, null, 2));
