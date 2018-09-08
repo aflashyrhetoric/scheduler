@@ -164,6 +164,8 @@ collegeCourseMap = flatten(collegeCourseMap)
 
 timeslots.forEach(slot => {
   let allCurrentCourses = []
+  let scheduledStudents = [];
+  let maxGroupSize = 1;
 
   collegeCourseMap.forEach( college => {
     let currentCollegeCourses = []
@@ -181,7 +183,15 @@ timeslots.forEach(slot => {
         .filter(student => student.college == college.name)
         // .map(student => student.name)
 
-    console.log(`${college.name} - ${currentCollegeStudents}`)
+
+    maxGroupSize = Math.max(...flatten(currentCollegeStudents
+        .map(student => student.mandates
+        .map(mandate => mandate.groupLimit))))
+
+    // currentCollegeStudents.forEach(student => {
+    // });
+
+    // console.log(`${college.name} - ${currentCollegeStudents}`)
   })
 })
 
