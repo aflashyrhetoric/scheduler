@@ -200,7 +200,7 @@ timeslots.forEach(slot => {
     }
   });
 
-  // Log time slots and the courses in them
+  // 8:00AM - 9:00AM - [ CLASSES ]
   // console.log(`${slot.toString()} - ${strf(allCurrentCourses)}`);
 
   // For each college, find available kids
@@ -257,26 +257,6 @@ timeslots.forEach(slot => {
     }
   }); // End of studentsInCurrentCollege forEach
 
-  // colleges.forEach(college => {
-  //   // List of kids in this college
-  //   studentsInCurrentCollege = studentsInCurrentCollege.concat(
-  //     ...studentList.filter(student => student.college == college.name)
-  //   );
-
-  //   // Calculate the largest group possible for these kids
-  //   maxGroupSize = Math.max(
-  //     ...flatten(
-  //       studentsInCurrentCollege.map(student =>
-  //         student.mandates.map(mandate => mandate.groupLimit)
-  //       )
-  //     )
-  //   );
-  // });
-
-  // console.log(`${slot.toString()} - ${strf(studentsInCurrentCollege)}`);
-  // printClassOkverview(allCurrentCourses, slot)
-
-  // console.log(slot)
 }); // End of timeslot loop
 
 str(timeslots);

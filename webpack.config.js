@@ -39,9 +39,9 @@ if (process.env.NODE_ENV !== 'production') {
   // Development
   //
   config.plugins = config.plugins.concat([
-    new webpack.NamedModulesPlugin(),
+    // new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ]);
 } else {
   config.plugins = config.plugins.concat([
