@@ -1,4 +1,5 @@
 import studentRoster from './students';
+import timeslots from './timeslots';
 
 let studentList = studentRoster.students;
 
@@ -110,8 +111,6 @@ let Albany = {
   ],
 };
 
-
-
 // 6 schools with 4 courses each
 colleges.push(
   Hampton,
@@ -121,7 +120,6 @@ colleges.push(
   USC,
   Albany
 );
-
 
 // Add kids to colleges
 colleges.forEach(college => {
@@ -144,6 +142,10 @@ let allCourses = colleges.map(college => {
 });
 
 allCourses = flatten(allCourses);
+
+timeslots.forEach(slot => {
+  console.log(slot.toString());
+});
 
 /*
  * Student-related utility functions
