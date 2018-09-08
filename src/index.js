@@ -31,12 +31,18 @@ function getEndTime(startTime, duration) {
   return newTime;
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+Array.prototype.shuffle = function() {
+  var input = this;
+
+  for (var i = input.length - 1; i >= 0; i--) {
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    var itemAtIndex = input[randomIndex];
+
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
   }
-}
+  return input;
+};
 
 function pp(time) {
   let AMPM = time.hours < 12 ? "AM" : "PM";
@@ -139,12 +145,15 @@ let Albany = {
 // 6 schools with 4 courses each
 colleges.push(
   Hampton,
-  Pittsburgh,
-  Temple,
+  // Pittsburgh,
+  // Temple,
   Maryland,
   USC,
   Albany
 );
+
+// Shuffle colleges to remove bias a bit
+// colleges.shuffle();
 
 // Add kids to colleges
 colleges.forEach(college => {
@@ -172,15 +181,17 @@ let collegeCourseMap = colleges.map(college => {
 timeslots.forEach(slot => {
   let allCurrentCourses = [];
   let maxGroupSize = 1;
-  let currentCollegeStudents = [];
+  let studentsInCurrentCollege = [];
   let currentCollegeCourses = [];
   slot.scheduledStudents = [];
 
   // Find the current courses
   collegeCourseMap.forEach(college => {
-    currentCollegeCourses = college.courses.filter(college =>
-      college.fitsIn(slot)
+    currentCollegeCourses = currentCollegeCourses.concat(
+      ...college.courses.filter(college => college.fitsIn(slot))
     );
+
+    // If there are any classes, add them
     if (currentCollegeCourses.length > 0) {
       allCurrentCourses = allCurrentCourses.concat({
         college: college.name,
@@ -189,65 +200,90 @@ timeslots.forEach(slot => {
     }
   });
 
-  // For each college, find available kids
-  colleges.forEach(college => {
-    // List of kids in this college
-    currentCollegeStudents = studentList.filter(
-      student => student.college == college.name
-    );
+  // Log time slots and the courses in them
+  // console.log(`${slot.toString()} - ${strf(allCurrentCourses)}`);
 
-    // Calculate the largest group possible for these kids
+  // For each college, find available kids
+
+  allCurrentCourses.forEach(course => {
+    // Kids in this college
+    studentsInCurrentCollege = studentsInCurrentCollege.concat(
+      ...studentList.filter(student => student.college == college.name)
+    );
+  });
+
+  // For each college kid, assign roles
+  studentsInCurrentCollege.forEach(student => {
+    const studentIsNotFullyScheduled = !student.mandates
+      .map(mandate => mandate.scheduled)
+      .includes(false);
+
     maxGroupSize = Math.max(
       ...flatten(
-        currentCollegeStudents.map(student =>
+        studentsInCurrentCollege.map(student =>
           student.mandates.map(mandate => mandate.groupLimit)
         )
       )
     );
 
-    // For each college kid, assign roles
-    currentCollegeStudents.forEach(student => {
-      let studentIsNotFullyScheduled = !student.mandates
-        .map(mandate => mandate.scheduled)
-        .includes(false);
+    // If the student has remaining classes, check
+    if (
+      !studentIsNotFullyScheduled &&
+      slot.scheduledStudents.length <= maxGroupSize
+    ) {
+      let hasScheduledNewSlot = false;
 
-      // If the student has remaining classes, check
-      if (
-        !studentIsNotFullyScheduled &&
-        slot.scheduledStudents.length <= maxGroupSize
-      ) {
-        let hasScheduledNewSlot = false;
-
-        // Add to time slot
-        if (slot.scheduledStudents.length + 1 <= maxGroupSize) {
-          slot.scheduledStudents.push(student);
-        }
-
-        // Filter through remaining mandates, mark an appropriate one
-        student.mandates
-          .filter(mandate => !mandate.scheduled)
-          .forEach(mandate => {
-            // Check that it's the right one
-            if (
-              slot.scheduledStudents.length <= mandate.groupLimit &&
-              !hasScheduledNewSlot
-            ) {
-              mandate.scheduled = true;
-              hasScheduledNewSlot = true;
-            } else {
-              slot.scheduledStudents.pop();
-            }
-          });
+      // Add to time slot
+      if (slot.scheduledStudents.length + 1 <= maxGroupSize) {
+        slot.scheduledStudents.push(student);
       }
-    }); // End of currentCollegeStudents forEach
-  });
+
+      // Filter through remaining mandates, mark an appropriate one
+      student.mandates
+        .filter(mandate => !mandate.scheduled)
+        .forEach(mandate => {
+          // Check that it's the right one
+          if (
+            slot.scheduledStudents.length <= mandate.groupLimit &&
+            !hasScheduledNewSlot
+          ) {
+            mandate.scheduled = true;
+            hasScheduledNewSlot = true;
+          } else {
+            slot.scheduledStudents.pop();
+          }
+        });
+    }
+  }); // End of studentsInCurrentCollege forEach
+
+  // colleges.forEach(college => {
+  //   // List of kids in this college
+  //   studentsInCurrentCollege = studentsInCurrentCollege.concat(
+  //     ...studentList.filter(student => student.college == college.name)
+  //   );
+
+  //   // Calculate the largest group possible for these kids
+  //   maxGroupSize = Math.max(
+  //     ...flatten(
+  //       studentsInCurrentCollege.map(student =>
+  //         student.mandates.map(mandate => mandate.groupLimit)
+  //       )
+  //     )
+  //   );
+  // });
+
+  // console.log(`${slot.toString()} - ${strf(studentsInCurrentCollege)}`);
   // printClassOkverview(allCurrentCourses, slot)
 
   // console.log(slot)
 }); // End of timeslot loop
 
-str(timeslots)
+// str(timeslots);
 // str(studentList)
+
+function strf(obj) {
+  return JSON.stringify(obj, null, 2);
+}
 
 function str(obj) {
   console.log(JSON.stringify(obj, null, 2));
