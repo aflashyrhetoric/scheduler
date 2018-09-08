@@ -161,18 +161,17 @@ let collegeCourseMap = colleges.map(college => {
 });
 collegeCourseMap = flatten(collegeCourseMap);
 
-console.log(collegeCourseMap);
 
 timeslots.forEach(slot => {
-  // console.log(Hampton.courses[0].fitsIn(slot) + '\n');
   let allCurrentCourses = [];
 
-  colleges.forEach( college => {
+  collegeCourseMap.forEach( college => {
     let currentCollegeCourses = [];
     currentCollegeCourses = college.courses.filter( college => college.fitsIn(slot));
+    if(currentCollegeCourses.length > 0) {
+      allCurrentCourses = allCurrentCourses.concat({ college: college.name, courses: currentCollegeCourses});
+    }
   });
-
-  allCurrentCourses = allCurrentCourses.concat(currentCollegeCourses);
 
   // collegeCourseMap.forEach( collegeCourseMapping => {
   //   currentCourses = collegeCourseMapping.filter( college => {
@@ -181,7 +180,8 @@ timeslots.forEach(slot => {
   // });
 
   if(allCurrentCourses.length > 0) {
-    console.log(`The courses that fit in the ${slot} are ${currentCourses.map(course => `${course.name}`)}`);
+    const courseName = allCurrentCourses.map(course => `${course.courses.map(course => course.name)} (${course.college})`);
+    console.log(`The courses that fit in the ${slot} are ${courseName}`);
   } else {
     console.log(`There are no courses at ${slot} that you can sit in on.`);
   }
