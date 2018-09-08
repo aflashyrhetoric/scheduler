@@ -132,11 +132,11 @@ let Albany = {
 // 6 schools with 4 courses each
 colleges.push(
   Hampton,
-  Pittsburgh,
-  Temple,
-  Maryland,
-  USC,
-  Albany
+  // Pittsburgh,
+  // Temple,
+  // Maryland,
+  // USC,
+  // Albany
 )
 
 // Add kids to colleges
@@ -162,10 +162,11 @@ let collegeCourseMap = colleges.map(college => {
 })
 collegeCourseMap = flatten(collegeCourseMap)
 
+// MAIN LOGIC LOOP
 timeslots.forEach(slot => {
   let allCurrentCourses = []
-  let scheduledStudents = [];
   let maxGroupSize = 1;
+  slot.scheduledStudents = [];
 
   collegeCourseMap.forEach( college => {
     let currentCollegeCourses = []
@@ -175,7 +176,7 @@ timeslots.forEach(slot => {
     }
   })
 
-  // printOverview(allCurrentCourses)
+  // printOverview(allCurrentCourses, slot)
 
   colleges.forEach(college => {
     // List of kids in this college
@@ -183,20 +184,53 @@ timeslots.forEach(slot => {
         .filter(student => student.college == college.name)
         // .map(student => student.name)
 
-
+    // Calculate maxGroupSize
     maxGroupSize = Math.max(...flatten(currentCollegeStudents
         .map(student => student.mandates
         .map(mandate => mandate.groupLimit))))
 
-    // currentCollegeStudents.forEach(student => {
-    // });
+    currentCollegeStudents.forEach(student => {
+      let studentIsNotFullyScheduled = !student.mandates
+                          .map(mandate => mandate.scheduled)
+                          .includes(false);
+
+      // If the student has remaining classes, check
+      if(!studentIsNotFullyScheduled && slot.scheduledStudents.length <= maxGroupSize) {
+
+        // Add to time slot
+        if(slot.scheduledStudents.length + 1 <= maxGroupSize) {
+          slot.scheduledStudents.push(student);
+        }
+
+        // Filter through remaining mandates, mark an appropriate one
+        student.mandates
+          .filter(mandate => !mandate.scheduled)
+          .forEach(mandate => {
+
+          // Check that it's the right one
+          if(slot.scheduledStudents.length <= mandate.groupLimit) {
+            mandate.scheduled = true;
+          } else {
+            slot.scheduledStudents.pop();
+          }
+        });
+      }
+    });
 
     // console.log(`${college.name} - ${currentCollegeStudents}`)
   })
+  console.log(str(timeslots))
+
 })
 
+// console.log(JSON.stringify(timeslots, null, 2))
+
+function str(obj) {
+  return JSON.stringify(obj, null, 2)
+}
+
 // Given a list of courses at a given time slot, prints it
-function printOverview(allCurrentCourses) {
+function printOverview(allCurrentCourses, slot) {
   if(allCurrentCourses.length > 0) {
     const courseName = allCurrentCourses.map(course => `${course.courses.map(course => course.name)} (${course.college})`)
     console.log(`The courses that fit in the ${slot} are ${courseName}`)
