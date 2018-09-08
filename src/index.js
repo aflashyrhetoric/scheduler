@@ -161,12 +161,14 @@ let collegeCourseMap = colleges.map(college => {
   }
 })
 
-// MAIN LOGIC LOOP
+// For each time slot,
 timeslots.forEach(slot => {
   let allCurrentCourses = []
   let maxGroupSize = 1;
+  let currentCollegeStudents = []
   slot.scheduledStudents = [];
 
+  // Find the current courses
   collegeCourseMap.forEach( college => {
     let currentCollegeCourses = []
     currentCollegeCourses = college.courses.filter( college => college.fitsIn(slot))
@@ -175,11 +177,10 @@ timeslots.forEach(slot => {
     }
   })
 
-  // printOverview(allCurrentCourses, slot)
-
+  // For each college, find available kids
   colleges.forEach(college => {
     // List of kids in this college
-    let currentCollegeStudents = studentList
+    currentCollegeStudents = studentList
         .filter(student => student.college == college.name)
         // .map(student => student.name)
 
@@ -187,48 +188,48 @@ timeslots.forEach(slot => {
     maxGroupSize = Math.max(...flatten(currentCollegeStudents
         .map(student => student.mandates
         .map(mandate => mandate.groupLimit))))
-
-    currentCollegeStudents.forEach(student => {
-      let studentIsNotFullyScheduled = !student.mandates
-                          .map(mandate => mandate.scheduled)
-                          .includes(false);
-
-      // If the student has remaining classes, check
-      if(!studentIsNotFullyScheduled && slot.scheduledStudents.length <= maxGroupSize) {
-
-        // Add to time slot
-        if(slot.scheduledStudents.length + 1 <= maxGroupSize) {
-          slot.scheduledStudents.push(student);
-        }
-
-        // Filter through remaining mandates, mark an appropriate one
-        student.mandates
-          .filter(mandate => !mandate.scheduled)
-          .forEach(mandate => {
-
-          // Check that it's the right one
-          if(slot.scheduledStudents.length <= mandate.groupLimit) {
-            mandate.scheduled = true;
-          } else {
-            slot.scheduledStudents.pop();
-          }
-        });
-      }
-    });
-
-    // console.log(`${college.name} - ${currentCollegeStudents}`)
   })
-  // console.log(str(timeslots))
+
+  // For each college kid, assign roles
+  currentCollegeStudents.forEach(student => {
+    let studentIsNotFullyScheduled = !student.mandates
+                        .map(mandate => mandate.scheduled)
+                        .includes(false);
+
+    // If the student has remaining classes, check
+    if(!studentIsNotFullyScheduled && slot.scheduledStudents.length <= maxGroupSize) {
+
+      // Add to time slot
+      if(slot.scheduledStudents.length + 1 <= maxGroupSize) {
+        slot.scheduledStudents.push(student);
+      }
+
+      // Filter through remaining mandates, mark an appropriate one
+      student.mandates
+        .filter(mandate => !mandate.scheduled)
+        .forEach(mandate => {
+
+        // Check that it's the right one
+        if(slot.scheduledStudents.length <= mandate.groupLimit) {
+          mandate.scheduled = true;
+        } else {
+          slot.scheduledStudents.pop();
+        }
+      })
+    }
+  }) // End of currentCollegeStudents forEach
+
+  // printClassOverview(allCurrentCourses, slot)
 })
 
-// console.log(JSON.stringify(timeslots, null, 2))
+console.log(JSON.stringify(timeslots, null, 2))
 
 function str(obj) {
   return JSON.stringify(obj, null, 2)
 }
 
 // Given a list of courses at a given time slot, prints it
-function printOverview(allCurrentCourses, slot) {
+function printClassOverview(allCurrentCourses, slot) {
   if(allCurrentCourses.length > 0) {
     const courseName = allCurrentCourses.map(course => `${course.courses.map(course => course.name)} (${course.college})`)
     console.log(`The courses that fit in the ${slot} are ${courseName}`)
