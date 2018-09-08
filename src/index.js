@@ -183,6 +183,7 @@ timeslots.forEach(slot => {
   let maxGroupSize;
   let studentsInCurrentCollege = [];
   let currentCollegeCourses = [];
+  slot.groupIsBooked = false;
   slot.scheduledStudents = [];
 
   // Find the current courses
@@ -228,7 +229,7 @@ timeslots.forEach(slot => {
     // console.log(`${student.name} - ${!student.mandates.filter(mandate => mandate.scheduled).length === 0}`)
 
     /* 
-     * FOR BOOKING SOLO SESSIONS
+     * FOR SOLO SESSIONS
      */
     if (
       currentGroupSize == 0 &&
@@ -249,13 +250,21 @@ timeslots.forEach(slot => {
 
           // Prevent duplicate booking
           hasAlreadyScheduledASlot = true;
+
+          slot.groupIsBooked = true;
         });
     }
 
     /* 
      * FOR BOOKING GROUP SESSIONS
      */
-    if (studentIsNotFullyScheduled && !hasAlreadyScheduledASlot) {
+    if (
+      studentIsNotFullyScheduled &&
+      !hasAlreadyScheduledASlot &&
+      !slot.groupIsBooked
+    ) {
+
+      // console.log(`${student.name}`)
 
       maxGroupSize = Math.min(
         ...flatten(
@@ -264,7 +273,6 @@ timeslots.forEach(slot => {
           )
         )
       );
-
 
       // Filter through GROUP mandates, mark an appropriate one
       student.mandates
@@ -275,11 +283,10 @@ timeslots.forEach(slot => {
           // Check that it's the right one
           if (
             currentGroupSize + 1 <= mandate.groupLimit &&
-            currentGroupSize + 1 <= maxGroupSize &&
+            // currentGroupSize + 1 <= maxGroupSize &&
             !hasAlreadyScheduledASlot
           ) {
-          
-          // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
+            // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
             // Book the kid to the group
             slot.scheduledStudents.push(student);
 
