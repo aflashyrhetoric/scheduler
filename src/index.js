@@ -46,7 +46,8 @@ function flatten(arr1) {
 
 
 class Course {
-  constructor(startHour, startMinute, duration) {
+  constructor(name, startHour, startMinute, duration) {
+    this.name = name;
     this.startTime = new Time(startHour, startMinute);
     this.duration = duration;
     this.endTime = getEndTime(this.startTime, this.duration);
@@ -58,11 +59,6 @@ class Course {
     let startTimeInSeconds = this.startTime.convertToSeconds();
     let endTimeInSeconds = this.endTime.convertToSeconds();
 
-    // console.log(`timeSlotStart = ${timeSlotStart}`);
-    // console.log(`timeSlotEnd = ${timeSlotEnd}`);
-    // console.log(`startTimeInSeconds = ${startTimeInSeconds}`);
-    // console.log(`endTimeInSeconds = ${endTimeInSeconds}`);
-
     return timeSlotStart >= startTimeInSeconds &&
            timeSlotEnd   <= endTimeInSeconds;
   }
@@ -70,25 +66,25 @@ class Course {
 
 class Wheatley extends Course {
   constructor(startHour, startMinute) {
-    super(startHour, startMinute, 50);
+    super('Wheatley', startHour, startMinute, 50);
   }
 }
 
 class Reading extends Course {
   constructor(startHour, startMinute) {
-    super(startHour, startMinute, 60);
+    super('Reading', startHour, startMinute, 60);
   }
 }
 
 class Writing extends Course {
   constructor(startHour, startMinute) {
-    super(startHour, startMinute, 45);
+    super('Writing', startHour, startMinute, 45);
   }
 }
 
 class SharedText extends Course {
   constructor(startHour, startMinute) {
-    super(startHour, startMinute, 25);
+    super('SharedText', startHour, startMinute, 25);
   }
 }
 
@@ -98,7 +94,7 @@ let Hampton = {
     new Wheatley(8, 10),
     new Reading(11, 0),
     new Writing(12, 0),
-    new SharedText(2, 15)
+    new SharedText(14, 15)
   ],
 }
 let Pittsburgh = Object.assign({}, Hampton);
@@ -111,7 +107,7 @@ let Maryland = {
     new Writing(8, 55),
     new Reading(11, 0),
     new SharedText(12, 2, 30),
-    new Wheatley(1, 15),
+    new Wheatley(13, 15),
   ],
 };
 let USC = {
@@ -129,7 +125,7 @@ let Albany = {
     new Wheatley(8, 2),
     new Reading(11, 0),
     new Writing(1, 15, 50),
-    new SharedText(3, 5, 30),
+    new SharedText(15, 5, 30),
   ],
 };
 
@@ -157,36 +153,36 @@ colleges.forEach(college => {
  * Get all courses 
  */
 
-let allCourses = colleges.map(college => {
-  return college.courses;
+let collegeCourseMap = colleges.map(college => {
+  return {
+    name: college.name,
+    courses: college.courses
+  }
 });
+collegeCourseMap = flatten(collegeCourseMap);
 
-allCourses = flatten(allCourses);
+console.log(collegeCourseMap);
 
 timeslots.forEach(slot => {
-  console.log(Hampton.courses[0].fitsIn(slot) + '\n');
-  // console.log(Hampton.courses[0]);
+  // console.log(Hampton.courses[0].fitsIn(slot) + '\n');
+  let allCurrentCourses = [];
+
+  colleges.forEach( college => {
+    let currentCollegeCourses = [];
+    currentCollegeCourses = college.courses.filter( college => college.fitsIn(slot));
+  });
+
+  allCurrentCourses = allCurrentCourses.concat(currentCollegeCourses);
+
+  // collegeCourseMap.forEach( collegeCourseMapping => {
+  //   currentCourses = collegeCourseMapping.filter( college => {
+  //     return college.fitsIn(slot);
+  //   });
+  // });
+
+  if(allCurrentCourses.length > 0) {
+    console.log(`The courses that fit in the ${slot} are ${currentCourses.map(course => `${course.name}`)}`);
+  } else {
+    console.log(`There are no courses at ${slot} that you can sit in on.`);
+  }
 });
-
-// Maryland.courses[0].
-
-// timeslots.forEach(slot => {
-//   console.log(slot.toString());
-// });
-
-// console.log(colleges);
-
-// studentList.forEach( student => {
-//   console.log(student.name);
-// })
-
-// colleges.forEach( college => {
-//   console.log(`${college.name}`);
-//   college.courses.forEach(course => {
-//     console.log(course);
-//   });
-//   console.log('\n');
-// })
-
-
-
