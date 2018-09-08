@@ -132,11 +132,11 @@ let Albany = {
 // 6 schools with 4 courses each
 colleges.push(
   Hampton,
-  // Pittsburgh,
-  // Temple,
-  // Maryland,
-  // USC,
-  // Albany
+  Pittsburgh,
+  Temple,
+  Maryland,
+  USC,
+  Albany
 )
 
 // Add kids to colleges
@@ -160,7 +160,6 @@ let collegeCourseMap = colleges.map(college => {
     courses: college.courses
   }
 })
-collegeCourseMap = flatten(collegeCourseMap)
 
 // MAIN LOGIC LOOP
 timeslots.forEach(slot => {
@@ -219,8 +218,7 @@ timeslots.forEach(slot => {
 
     // console.log(`${college.name} - ${currentCollegeStudents}`)
   })
-  console.log(str(timeslots))
-
+  // console.log(str(timeslots))
 })
 
 // console.log(JSON.stringify(timeslots, null, 2))
