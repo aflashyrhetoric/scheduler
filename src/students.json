@@ -5,10 +5,12 @@
       "college": "USC",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -17,10 +19,12 @@
       "college": "Lehman",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -29,10 +33,12 @@
       "college": "Hampton",
       "mandates": [
         {
-          "groupLimit": 1
+          "groupLimit": 1,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -41,7 +47,8 @@
       "college": "Hampton",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -50,10 +57,12 @@
       "college": "Temple",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -62,7 +71,8 @@
       "college": "Pittsburgh",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -71,10 +81,12 @@
       "college": "Hampton",
       "mandates": [
         {
-          "groupLimit": 3
+          "groupLimit": 3,
+          "scheduled": false
         },
         {
-          "groupLimit": 3
+          "groupLimit": 3,
+          "scheduled": false
         }
       ]
     },
@@ -83,10 +95,12 @@
       "college": "Maryland",
       "mandates": [
         {
-          "groupLimit": 1
+          "groupLimit": 1,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -95,10 +109,12 @@
       "college": "USC",
       "mandates": [
         {
-          "groupLimit": 1
+          "groupLimit": 1,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -107,10 +123,12 @@
       "college": "Albany",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -119,10 +137,12 @@
       "college": "Albany",
       "mandates": [
         {
-          "groupLimit": 3
+          "groupLimit": 3,
+          "scheduled": false
         },
         {
-          "groupLimit": 3
+          "groupLimit": 3,
+          "scheduled": false
         }
       ]
     },
@@ -131,10 +151,12 @@
       "college": "Albany",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -143,10 +165,12 @@
       "college": "USC",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -155,10 +179,12 @@
       "college": "Maryland",
       "mandates": [
         {
-          "groupLimit": 1
+          "groupLimit": 1,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -167,10 +193,12 @@
       "college": "USC",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         },
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     },
@@ -179,7 +207,8 @@
       "college": "USC",
       "mandates": [
         {
-          "groupLimit": 2
+          "groupLimit": 2,
+          "scheduled": false
         }
       ]
     }
