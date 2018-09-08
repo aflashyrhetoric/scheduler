@@ -71,7 +71,7 @@ class SharedText {
 
 let Hampton = {
   name: "Hampton",
-  slots: [
+  courses: [
     new Wheatley(8, 10),
     new Reading(11, 0),
     new Writing(12, 0),
@@ -84,7 +84,7 @@ let Temple = Object.assign({}, Hampton);
 Temple.name = 'Temple';
 let Maryland = {
   name: 'Maryland',
-  slots: [
+  courses: [
     new Writing(8, 55),
     new Reading(11, 0),
     new SharedText(12, 2, 30),
@@ -93,7 +93,7 @@ let Maryland = {
 };
 let USC = {
   name: 'USC',
-  slots: [
+  courses: [
     new Writing(8, 2, 50),
     new Wheatley(8, 55),
     new SharedText(9, 47, 30),
@@ -102,7 +102,7 @@ let USC = {
 };
 let Albany = {
   name: 'Albany',
-  slots: [
+  courses: [
     new Wheatley(8, 2),
     new Reading(11, 0),
     new Writing(1, 15, 50),
@@ -112,7 +112,7 @@ let Albany = {
 
 
 
-// 6 schools with 4 slots each
+// 6 schools with 4 courses each
 colleges.push(
   Hampton,
   Pittsburgh,
@@ -131,18 +131,19 @@ colleges.forEach(college => {
       college.members.push(student);
     }
   })
-  console.log(`${college.name} has ${college.members}`)
+  // console.log(`${college.name} has ${college.members.map(member => member.name)}`)
+  // console.log(college);
 });
 
 /*
- * Get all time slots
+ * Get all courses 
  */
 
-let allTimeSlots = colleges.map(college => {
-  return college.slots;
+let allCourses = colleges.map(college => {
+  return college.courses;
 });
 
-allTimeSlots = flatten(allTimeSlots);
+allCourses = flatten(allCourses);
 
 /*
  * Student-related utility functions
@@ -157,8 +158,8 @@ allTimeSlots = flatten(allTimeSlots);
 
 // colleges.forEach( college => {
 //   console.log(`${college.name}`);
-//   college.slots.forEach(timeSlot => {
-//     console.log(timeSlot);
+//   college.courses.forEach(course => {
+//     console.log(course);
 //   });
 //   console.log('\n');
 // })
