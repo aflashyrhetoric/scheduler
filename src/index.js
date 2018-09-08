@@ -11,9 +11,15 @@ class Time {
     this.hours = hours;
     this.minutes = minutes;
   }
+  convertToSeconds() {
+    let seconds = 0;
+    seconds += this.hours * 60 /* minutes */ * 60 /* seconds */;
+    seconds += this.minutes * 60 /* seconds */;
+    return seconds;
+  }
 }
 
-function getEnd(startTime, duration) {
+function getEndTime(startTime, duration) {
   let newTime = {};
   let remainder = (startTime.minutes + duration) % 60;
 
@@ -38,35 +44,51 @@ function flatten(arr1) {
   return arr1.reduce((acc, val) => acc.concat(val), []);
 }
 
-class Wheatley {
-  constructor(startHour, startMinute) {
-    this.startTime = new Time(startHour, startMinute);
-    this.duration = 50;
-    this.endTime = getEnd(this.startTime, this.duration);
-  }
-}
 
-class Reading {
-  constructor(startHour, startMinute) {
-    this.startTime = new Time(startHour, startMinute);
-    this.duration = 60;
-    this.endTime = getEnd(this.startTime, this.duration);
-  }
-}
-
-class Writing {
-  constructor(startHour, startMinute, duration = 45) {
+class Course {
+  constructor(startHour, startMinute, duration) {
     this.startTime = new Time(startHour, startMinute);
     this.duration = duration;
-    this.endTime = getEnd(this.startTime, this.duration);
+    this.endTime = getEndTime(this.startTime, this.duration);
+  }
+
+  fitsIn(timeSlot) {
+    let timeSlotStart = timeSlot.startTime.convertToSeconds();
+    let timeSlotEnd = timeSlot.endTime.convertToSeconds();
+    let startTimeInSeconds = this.startTime.convertToSeconds();
+    let endTimeInSeconds = this.endTime.convertToSeconds();
+
+    // console.log(`timeSlotStart = ${timeSlotStart}`);
+    // console.log(`timeSlotEnd = ${timeSlotEnd}`);
+    // console.log(`startTimeInSeconds = ${startTimeInSeconds}`);
+    // console.log(`endTimeInSeconds = ${endTimeInSeconds}`);
+
+    return timeSlotStart >= startTimeInSeconds &&
+           timeSlotEnd   <= endTimeInSeconds;
   }
 }
 
-class SharedText {
-  constructor(startHour, startMinute, duration = 25) {
-    this.startTime = new Time(startHour, startMinute);
-    this.duration = duration;
-    this.endTime = getEnd(this.startTime, this.duration);
+class Wheatley extends Course {
+  constructor(startHour, startMinute) {
+    super(startHour, startMinute, 50);
+  }
+}
+
+class Reading extends Course {
+  constructor(startHour, startMinute) {
+    super(startHour, startMinute, 60);
+  }
+}
+
+class Writing extends Course {
+  constructor(startHour, startMinute) {
+    super(startHour, startMinute, 45);
+  }
+}
+
+class SharedText extends Course {
+  constructor(startHour, startMinute) {
+    super(startHour, startMinute, 25);
   }
 }
 
@@ -129,8 +151,6 @@ colleges.forEach(college => {
       college.members.push(student);
     }
   })
-  // console.log(`${college.name} has ${college.members.map(member => member.name)}`)
-  // console.log(college);
 });
 
 /*
@@ -144,13 +164,15 @@ let allCourses = colleges.map(college => {
 allCourses = flatten(allCourses);
 
 timeslots.forEach(slot => {
-  console.log(slot.toString());
+  console.log(Hampton.courses[0].fitsIn(slot) + '\n');
+  // console.log(Hampton.courses[0]);
 });
 
-/*
- * Student-related utility functions
- */
+// Maryland.courses[0].
 
+// timeslots.forEach(slot => {
+//   console.log(slot.toString());
+// });
 
 // console.log(colleges);
 

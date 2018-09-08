@@ -3,6 +3,12 @@ class Time {
     this.hours = hours;
     this.minutes = minutes;
   }
+  convertToSeconds() {
+    let seconds = 0;
+    seconds += this.hours * 60 /* minutes */ * 60 /* seconds */;
+    seconds += this.minutes * 60 /* seconds */;
+    return seconds;
+  }
 }
 
 function pp(time) {
@@ -17,8 +23,8 @@ function pp(time) {
 class TimeSlot {
   constructor(startHour, startMinute) {
     this.startTime = new Time(startHour, startMinute);
-    if(startMinute + 30 == 60) {
-      this.endTime = new Time(startHour + 1, 0);
+    if(startMinute + 30 >= 60) {
+      this.endTime = new Time(startHour + 1, (startMinute + 30) % 60);
     } else {
       this.endTime = new Time(startHour, startMinute + 30);
     }
