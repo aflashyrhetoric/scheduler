@@ -217,19 +217,15 @@ timeslots.forEach(slot => {
   // For each college kid, assign roles
   studentsInCurrentCollege.forEach(student => {
     let hasAlreadyScheduledASlot = false;
+    let currentGroupSize = slot.scheduledStudents.length;
     const studentIsNotFullyScheduled = student.mandates
       .filter(mandate => mandate.scheduled)
       .length === 0
-
-    // console.log(`${student.name} - ${!student.mandates.filter(mandate => mandate.scheduled).length === 0}`)
-
     const studentRequiresSoloGroup = student.mandates
       .filter(mandate => mandate.groupLimit == 1)
       .length > 0
 
-    // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
-
-    let currentGroupSize = slot.scheduledStudents.length;
+    // console.log(`${student.name} - ${!student.mandates.filter(mandate => mandate.scheduled).length === 0}`)
 
     /* 
      * FOR BOOKING SOLO SESSIONS
@@ -253,14 +249,14 @@ timeslots.forEach(slot => {
 
           // Prevent duplicate booking
           hasAlreadyScheduledASlot = true;
-
         });
     }
 
     /* 
      * FOR BOOKING GROUP SESSIONS
      */
-    if (!studentIsNotFullyScheduled && !hasAlreadyScheduledASlot) {
+    if (studentIsNotFullyScheduled && !hasAlreadyScheduledASlot) {
+
       maxGroupSize = Math.min(
         ...flatten(
           studentsInCurrentCollege.map(student =>
@@ -269,21 +265,21 @@ timeslots.forEach(slot => {
         )
       );
 
-      // Add to time slot (if it's OK)
-      if (currentGroupSize + 1 <= maxGroupSize) {
-      }
 
       // Filter through GROUP mandates, mark an appropriate one
       student.mandates
         .filter(mandate => !mandate.scheduled)
         .filter(mandate => mandate.groupLimit > 1)
         .forEach(mandate => {
+
           // Check that it's the right one
           if (
             currentGroupSize + 1 <= mandate.groupLimit &&
             currentGroupSize + 1 <= maxGroupSize &&
             !hasAlreadyScheduledASlot
           ) {
+          
+          // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
             // Book the kid to the group
             slot.scheduledStudents.push(student);
 
