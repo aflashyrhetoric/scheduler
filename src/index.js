@@ -208,9 +208,11 @@ timeslots.forEach(slot => {
   allCurrentCourses.forEach(course => {
     // Kids in this college
     studentsInCurrentCollege = studentsInCurrentCollege.concat(
-      ...studentList.filter(student => student.college == college.name)
+      ...studentList.filter(student => student.college == course.college)
     );
   });
+
+  // str(studentsInCurrentCollege)
 
   // For each college kid, assign roles
   studentsInCurrentCollege.forEach(student => {
@@ -231,9 +233,10 @@ timeslots.forEach(slot => {
       !studentIsNotFullyScheduled &&
       slot.scheduledStudents.length <= maxGroupSize
     ) {
-      let hasScheduledNewSlot = false;
 
-      // Add to time slot
+      let hasAlreadyScheduledASlot = false;
+
+      // Add to time slot (if it's OK)
       if (slot.scheduledStudents.length + 1 <= maxGroupSize) {
         slot.scheduledStudents.push(student);
       }
@@ -245,13 +248,11 @@ timeslots.forEach(slot => {
           // Check that it's the right one
           if (
             slot.scheduledStudents.length <= mandate.groupLimit &&
-            !hasScheduledNewSlot
+            !hasAlreadyScheduledASlot
           ) {
             mandate.scheduled = true;
-            hasScheduledNewSlot = true;
-          } else {
-            slot.scheduledStudents.pop();
-          }
+            hasAlreadyScheduledASlot = true;
+          } 
         });
     }
   }); // End of studentsInCurrentCollege forEach
@@ -278,7 +279,7 @@ timeslots.forEach(slot => {
   // console.log(slot)
 }); // End of timeslot loop
 
-// str(timeslots);
+str(timeslots);
 // str(studentList)
 
 function strf(obj) {
