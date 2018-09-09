@@ -1,5 +1,6 @@
 import studentRoster from "./students";
 import timeslots from "./timeslots";
+import Time from './Time';
 import {
   strf,
   str,
@@ -13,25 +14,12 @@ import {
 let studentList = studentRoster.students;
 let colleges = [];
 
-class Time {
-  constructor(hours, minutes) {
-    this.hours = hours;
-    this.minutes = minutes;
-  }
-  convertToSeconds() {
-    let seconds = 0;
-    seconds += this.hours * 60 /* minutes */ * 60; /* seconds */
-    seconds += this.minutes * 60; /* seconds */
-    return seconds;
-  }
-}
-
 Array.prototype.shuffle = function() {
-  var input = this;
+  let input = this;
 
-  for (var i = input.length - 1; i >= 0; i--) {
-    var randomIndex = Math.floor(Math.random() * (i + 1));
-    var itemAtIndex = input[randomIndex];
+  for (let i = input.length - 1; i >= 0; i--) {
+    let randomIndex = Math.floor(Math.random() * (i + 1));
+    let itemAtIndex = input[randomIndex];
 
     input[randomIndex] = input[i];
     input[i] = itemAtIndex;
@@ -49,9 +37,9 @@ class Course {
 
   fitsIn(timeSlot) {
     let timeSlotStart = timeSlot.startTime.convertToSeconds();
-    let timeSlotEnd = timeSlot.endTime.convertToSeconds();
     let startTimeInSeconds = this.startTime.convertToSeconds();
     let endTimeInSeconds = this.endTime.convertToSeconds();
+    let timeSlotEnd = timeSlot.endTime.convertToSeconds();
 
     return (
       timeSlotStart >= startTimeInSeconds && timeSlotEnd <= endTimeInSeconds
@@ -60,26 +48,26 @@ class Course {
 }
 
 class Wheatley extends Course {
-  constructor(startHour, startMinute) {
-    super("Wheatley", startHour, startMinute, 50);
+  constructor(startHour, startMinute, duration = 50) {
+    super("Wheatley", startHour, startMinute, duration);
   }
 }
 
 class Reading extends Course {
-  constructor(startHour, startMinute) {
-    super("Reading", startHour, startMinute, 60);
+  constructor(startHour, startMinute, duration = 60 ) {
+    super("Reading", startHour, startMinute, duration);
   }
 }
 
 class Writing extends Course {
-  constructor(startHour, startMinute) {
-    super("Writing", startHour, startMinute, 45);
+  constructor(startHour, startMinute, duration = 45 ) {
+    super("Writing", startHour, startMinute, duration);
   }
 }
 
 class SharedText extends Course {
-  constructor(startHour, startMinute) {
-    super("SharedText", startHour, startMinute, 25);
+  constructor(startHour, startMinute, duration = 25) {
+    super("SharedText", startHour, startMinute, duration);
   }
 }
 
@@ -101,25 +89,25 @@ let Maryland = {
   courses: [
     new Writing(8, 55),
     new Reading(11, 0),
-    new SharedText(12, 2, 30),
+    new SharedText(12, 0, 30),
     new Wheatley(13, 15)
   ]
 };
 let USC = {
   name: "USC",
   courses: [
-    new Writing(8, 2, 50),
+    new Writing(8, 0, 50),
     new Wheatley(8, 55),
-    new SharedText(9, 47, 30),
+    new SharedText(9, 45, 30),
     new Reading(11, 0)
   ]
 };
 let Albany = {
   name: "Albany",
   courses: [
-    new Wheatley(8, 2),
+    new Wheatley(8, 0),
     new Reading(11, 0),
-    new Writing(1, 15, 50),
+    new Writing(13, 15, 50),
     new SharedText(15, 5, 30)
   ]
 };
@@ -154,8 +142,8 @@ let collegeCourseMap = colleges.map(college => {
 
 // For each time slot,
 timeslots.forEach(slot => {
-  let allCurrentCourses = [];
-  let studentsInCurrentCollege = [];
+  let currentCollegeCourseMap = [];
+  let studentsInCurrentIterationCollege = [];
   let currentCollegeCourses = [];
   slot.groupIsBooked = false;
   slot.maxGroupSize;
@@ -163,35 +151,35 @@ timeslots.forEach(slot => {
 
   // Find the current courses
   collegeCourseMap.forEach(college => {
-    currentCollegeCourses = currentCollegeCourses.concat(
-      ...college.courses.filter(college => college.fitsIn(slot))
-    );
+    currentCollegeCourses = college.courses.filter(college => college.fitsIn(slot))
 
     // If there are any classes, add them
     if (currentCollegeCourses.length > 0) {
-      allCurrentCourses = allCurrentCourses.concat({
+      currentCollegeCourseMap = currentCollegeCourseMap.concat({
         college: college.name,
         courses: currentCollegeCourses
       });
     }
   });
 
+  // str(currentCollegeCourses)
+  // console.log(`${slot.toString()}-${currentCollegeCourses}`)
+
   // 8:00AM - 9:00AM - [ CLASSES ]
-  // console.log(`${slot.toString()} - ${strf(allCurrentCourses)}`);
+  // console.log(`${slot.toString()} - ${strf(currentCollegeCourseMap)}`);
 
   // For each college, find available kids
-
-  allCurrentCourses.forEach(course => {
+  currentCollegeCourseMap.forEach(course => {
     // Kids in this college
-    studentsInCurrentCollege = studentsInCurrentCollege.concat(
+    studentsInCurrentIterationCollege = studentsInCurrentIterationCollege.concat(
       ...studentList.filter(student => student.college == course.college)
     );
   });
-
-  // str(studentsInCurrentCollege)
+  console.log(`${slot.toString()}-${strf(currentCollegeCourseMap)}`)
+  // console.log(studentsInCurrentIterationCollege.map(student => student.name))
 
   // For each college kid, assign roles
-  studentsInCurrentCollege.forEach(student => {
+  studentsInCurrentIterationCollege.forEach(student => {
     let hasAlreadyScheduledASlot = false;
     let currentGroupSize = slot.scheduledStudents.length;
     const studentIsNotFullyScheduled =
@@ -240,7 +228,7 @@ timeslots.forEach(slot => {
 
       slot.maxGroupSize = Math.min(
         ...flatten(
-          studentsInCurrentCollege.map(student =>
+          studentsInCurrentIterationCollege.map(student =>
             student.mandates.map(mandate => mandate.groupLimit)
           )
         )
@@ -273,9 +261,10 @@ timeslots.forEach(slot => {
           }
         });
     }
-  }); // End of studentsInCurrentCollege forEach
+  }); // End of studentsInCurrentIterationCollege forEach
 }); // End of timeslot loop
 
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
 printMarkdownSchedule(timeslots);
+// str(timeslots)
 // str(studentList)
