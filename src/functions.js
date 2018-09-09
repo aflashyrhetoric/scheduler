@@ -1,44 +1,88 @@
-import Time from './Time'
-import { TimeSlot } from './timeslots'
+import Time from "./Time";
+import { TimeSlot } from "./timeslots";
 
 export function printMarkdownSchedule(timeslots) {
-
   /* 
    * Preparation
    */
-  let scheduleTemplate = `Time`;
-  let allSlots = TimeSlot.allSlots()
-  let uniqueDays = timeslots.reduce( (days, slot) => {
-    if(!days.includes(slot.day)) {
-      days.push(slot.day)
+  let allSlots = TimeSlot.allSlots();
+  let uniqueDays = timeslots.reduce((days, slot) => {
+    if (!days.includes(slot.day)) {
+      days.push(slot.day);
     }
     return days;
-  }, [])
+  }, []);
+
+  // An array of each day's slots, starting with the template "8 - 9AM" 
+  let uniqueDayTimeSlots = []
+  uniqueDayTimeSlots.push(allSlots)
+
+  uniqueDays.forEach( day => {
+    let dailySchedule = timeslots.filter( slot => {
+      return day === slot.day 
+    })
+    uniqueDayTimeSlots.push(dailySchedule)
+  })
 
   /* 
    * Set up the template heading in Markdown
    */
 
+  let scheduleTemplate = `Time`;
   // Add days to template
-  uniqueDays.forEach((day) => {
+  uniqueDays.forEach(day => {
     scheduleTemplate += `|${day}`;
-  })
+  });
+  scheduleTemplate = closeRow(scheduleTemplate);
+  scheduleTemplate += "|---";
+  uniqueDays.forEach(day => {
+    scheduleTemplate += "|---";
+  });
+  scheduleTemplate = closeRow(scheduleTemplate);
 
-  scheduleTemplate += '|\n'
-
-  uniqueDays.forEach( day => {
-    scheduleTemplate += '|---'
-  })
-
-  scheduleTemplate += '|\n'
 
   /* 
    * Logic for populating the template
    */
 
+  // uniqueDayTimeSlots.forEach(row => {
+  //   scheduleTemplate = addColumn(scheduleTemplate, dayRow[row]);
+  //   scheduleTemplate = closeRow(scheduleTemplate)
+  // })
 
+  for (let row = 0; row < allSlots.length; row++) {
+    // let dayRow = uniqueDayTimeSlots[row];
 
+    for( let column = 0; column < uniqueDayTimeSlots.length; column ++) {
+      scheduleTemplate = addColumn(scheduleTemplate, dayRow[row]);
+      scheduleTemplate = closeRow(scheduleTemplate)
+    }
+
+    // scheduleTemplate = addColumn(scheduleTemplate, dayRow[row]);
+    // scheduleTemplate = closeRow(scheduleTemplate)
+
+    // for (let column = 0; column < dayRow.length; column++) {
+    //   let dayColumn = dayRow[column];
+
+      // scheduleTemplate = addColumn(scheduleTemplate, dayRow);
+      // scheduleTemplate = closeRow(scheduleTemplate)
+    // }
+  }
+
+  console.log(scheduleTemplate)
 }
+
+function addColumn(template, text) {
+  return template += `| ${text}`
+}
+function closeRow(template) {
+  return template += `|\n`
+}
+
+
+
+
+
 
 
 

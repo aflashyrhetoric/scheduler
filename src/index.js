@@ -7,8 +7,8 @@ import {
   pp,
   flatten,
   printClassOverview,
-  printMarkdownSchedule,
-} from './functions'
+  printMarkdownSchedule
+} from "./functions";
 
 let studentList = studentRoster.students;
 let colleges = [];
@@ -38,7 +38,6 @@ Array.prototype.shuffle = function() {
   }
   return input;
 };
-
 
 class Course {
   constructor(name, startHour, startMinute, duration) {
@@ -126,14 +125,7 @@ let Albany = {
 };
 
 // 6 schools with 4 courses each
-colleges.push(
-  Hampton,
-  Pittsburgh,
-  Temple,
-  Maryland,
-  USC,
-  Albany
-);
+colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
 // Shuffle colleges to remove bias a bit
 // colleges.shuffle();
@@ -202,12 +194,10 @@ timeslots.forEach(slot => {
   studentsInCurrentCollege.forEach(student => {
     let hasAlreadyScheduledASlot = false;
     let currentGroupSize = slot.scheduledStudents.length;
-    const studentIsNotFullyScheduled = student.mandates
-      .filter(mandate => mandate.scheduled)
-      .length === 0
-    const studentRequiresSoloGroup = student.mandates
-      .filter(mandate => mandate.groupLimit == 1)
-      .length > 0
+    const studentIsNotFullyScheduled =
+      student.mandates.filter(mandate => mandate.scheduled).length === 0;
+    const studentRequiresSoloGroup =
+      student.mandates.filter(mandate => mandate.groupLimit == 1).length > 0;
 
     // console.log(`${student.name} - ${!student.mandates.filter(mandate => mandate.scheduled).length === 0}`)
 
@@ -246,7 +236,6 @@ timeslots.forEach(slot => {
       !hasAlreadyScheduledASlot &&
       !slot.groupIsBooked
     ) {
-
       // console.log(`${student.name}`)
 
       slot.maxGroupSize = Math.min(
@@ -262,7 +251,6 @@ timeslots.forEach(slot => {
         .filter(mandate => !mandate.scheduled)
         .filter(mandate => mandate.groupLimit > 1)
         .forEach(mandate => {
-
           // Check that it's the right one
           if (
             currentGroupSize + 1 <= mandate.groupLimit &&
@@ -273,7 +261,7 @@ timeslots.forEach(slot => {
             // Book the kid to the group
             slot.scheduledStudents.push(student);
 
-            if(slot.scheduledStudents.length == mandate.groupLimit) {
+            if (slot.scheduledStudents.length == mandate.groupLimit) {
               slot.groupIsBooked = true;
             }
 
@@ -289,7 +277,5 @@ timeslots.forEach(slot => {
 }); // End of timeslot loop
 
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
-printMarkdownSchedule(timeslots)
+printMarkdownSchedule(timeslots);
 // str(studentList)
-
-
