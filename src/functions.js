@@ -54,19 +54,26 @@ export function printMarkdownSchedule(timeslots) {
     // let dayRow = uniqueDayTimeSlots[row];
 
     for( let column = 0; column < uniqueDayTimeSlots.length; column ++) {
-      
-      let columnText = uniqueDayTimeSlots[column][row].scheduledStudents ? uniqueDayTimeSlots[column][row].scheduledStudents : uniqueDayTimeSlots[column][row]
+      let studentTextTemplate;
+      let areScheduledStudents = uniqueDayTimeSlots[column][row].scheduledStudents;
+      if(areScheduledStudents) {
+        let studentNames = uniqueDayTimeSlots[column][row].scheduledStudents.map(student => student.name)
+        studentTextTemplate = `${studentNames.join(', ')}`;
+      }
+
+      let columnText = areScheduledStudents ? studentTextTemplate : uniqueDayTimeSlots[column][row]
 
       if(columnText == '') {
         columnText = 'No Students Available'
       }
+
       scheduleTemplate = addColumn(scheduleTemplate, columnText ? columnText : uniqueDayTimeSlots[column][row]);
     }
 
     scheduleTemplate = closeRow(scheduleTemplate)
   }
 
-  str(scheduleTemplate)
+  console.log(scheduleTemplate)
   // str(uniqueDayTimeSlots[1][1])
 }
 
