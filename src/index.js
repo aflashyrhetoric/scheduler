@@ -162,10 +162,10 @@ let collegeCourseMap = colleges.map(college => {
 // For each time slot,
 timeslots.forEach(slot => {
   let allCurrentCourses = [];
-  let maxGroupSize;
   let studentsInCurrentCollege = [];
   let currentCollegeCourses = [];
   slot.groupIsBooked = false;
+  slot.maxGroupSize;
   slot.scheduledStudents = [];
 
   // Find the current courses
@@ -248,7 +248,7 @@ timeslots.forEach(slot => {
 
       // console.log(`${student.name}`)
 
-      maxGroupSize = Math.min(
+      slot.maxGroupSize = Math.min(
         ...flatten(
           studentsInCurrentCollege.map(student =>
             student.mandates.map(mandate => mandate.groupLimit)
@@ -265,7 +265,7 @@ timeslots.forEach(slot => {
           // Check that it's the right one
           if (
             currentGroupSize + 1 <= mandate.groupLimit &&
-            // currentGroupSize + 1 <= maxGroupSize &&
+            currentGroupSize <= slot.maxGroupSize &&
             !hasAlreadyScheduledASlot
           ) {
             // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
