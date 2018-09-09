@@ -81,7 +81,7 @@ function addColumn(template, text) {
   return template += `| ${text} `
 }
 function closeRow(template) {
-  return template += `|\n\n`
+  return template += `|\n`
 }
 
 
