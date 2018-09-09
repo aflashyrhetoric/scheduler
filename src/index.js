@@ -1,5 +1,13 @@
 import studentRoster from "./students";
 import timeslots from "./timeslots";
+import {
+  strf,
+  str,
+  getEndTime,
+  pp,
+  flatten,
+  printClassOverview
+} from './functions'
 
 let studentList = studentRoster.students;
 
@@ -19,18 +27,6 @@ class Time {
   }
 }
 
-function getEndTime(startTime, duration) {
-  let newTime = {};
-  let remainder = (startTime.minutes + duration) % 60;
-
-  if (startTime.minutes + duration >= 60) {
-    newTime = new Time(startTime.hours + 1, remainder);
-  } else {
-    newTime = new Time(startTime.hours, startTime.minutes + remainder);
-  }
-  return newTime;
-}
-
 Array.prototype.shuffle = function() {
   var input = this;
 
@@ -44,18 +40,6 @@ Array.prototype.shuffle = function() {
   return input;
 };
 
-function pp(time) {
-  let AMPM = time.hours < 12 ? "AM" : "PM";
-  let displayHours = time.hours > 12 ? time.hours % 12 : time.hours;
-  if (time.minutes == 0) {
-    time.minutes = "00";
-  }
-  return `${displayHours}:${time.minutes}${AMPM}`;
-}
-
-function flatten(arr1) {
-  return arr1.reduce((acc, val) => acc.concat(val), []);
-}
 
 class Course {
   constructor(name, startHour, startMinute, duration) {
@@ -290,6 +274,10 @@ timeslots.forEach(slot => {
             // Book the kid to the group
             slot.scheduledStudents.push(student);
 
+            if(slot.scheduledStudents.length == mandate.groupLimit) {
+              slot.groupIsBooked = true;
+            }
+
             // Satisfy one of the kid's requirements
             mandate.scheduled = true;
 
@@ -301,26 +289,7 @@ timeslots.forEach(slot => {
   }); // End of studentsInCurrentCollege forEach
 }); // End of timeslot loop
 
-str(timeslots);
+str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
 // str(studentList)
 
-function strf(obj) {
-  return JSON.stringify(obj, null, 2);
-}
 
-function str(obj) {
-  console.log(JSON.stringify(obj, null, 2));
-}
-
-// Given a list of courses at a given time slot, prints it
-function printClassOverview(allCurrentCourses, slot) {
-  if (allCurrentCourses.length > 0) {
-    const courseName = allCurrentCourses.map(
-      course =>
-        `${course.courses.map(course => course.name)} (${course.college})`
-    );
-    console.log(`The courses that fit in the ${slot} are ${courseName}`);
-  } else {
-    console.log(`There are no courses at ${slot} that you can sit in on.`);
-  }
-}
