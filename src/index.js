@@ -10,9 +10,7 @@ import {
 } from './functions'
 
 let studentList = studentRoster.students;
-
 let colleges = [];
-const HOUR = 60;
 
 class Time {
   constructor(hours, minutes) {

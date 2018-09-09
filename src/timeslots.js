@@ -1,26 +1,7 @@
-class Time {
-  constructor(hours, minutes) {
-    this.hours = hours;
-    this.minutes = minutes;
-  }
-  convertToSeconds() {
-    let seconds = 0;
-    seconds += this.hours * 60 /* minutes */ * 60 /* seconds */;
-    seconds += this.minutes * 60 /* seconds */;
-    return seconds;
-  }
-}
+import Time from './Time'
+import { pp } from './functions'
 
-function pp(time) {
-  let AMPM = time.hours < 12 ? 'AM' : 'PM';
-  let displayHours = time.hours > 12 ? time.hours % 12 : time.hours;
-  if(time.minutes == 0) {
-    time.minutes = '00';
-  }
-  return `${displayHours}:${time.minutes}${AMPM}`;
-}
-
-class TimeSlot {
+export class TimeSlot {
   constructor(day, startHour, startMinute) {
     this.day = day;
     this.startTime = new Time(startHour, startMinute);

@@ -1,4 +1,5 @@
-// LOL
+import Time from './Time'
+
 export function strf(obj) {
   return JSON.stringify(obj, null, 2);
 }
