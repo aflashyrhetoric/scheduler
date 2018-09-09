@@ -6,7 +6,8 @@ import {
   getEndTime,
   pp,
   flatten,
-  printClassOverview
+  printClassOverview,
+  printMarkdownSchedule,
 } from './functions'
 
 let studentList = studentRoster.students;
@@ -287,7 +288,8 @@ timeslots.forEach(slot => {
   }); // End of studentsInCurrentCollege forEach
 }); // End of timeslot loop
 
-str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
+// str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
+printMarkdownSchedule(timeslots)
 // str(studentList)
 
 

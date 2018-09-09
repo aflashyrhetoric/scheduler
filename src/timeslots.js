@@ -2,7 +2,7 @@ import Time from './Time'
 import { pp } from './functions'
 
 export class TimeSlot {
-  constructor(day, startHour, startMinute) {
+  constructor(startHour, startMinute, day = 'template') {
     this.day = day;
     this.startTime = new Time(startHour, startMinute);
     if(startMinute + 30 >= 60) {
@@ -14,39 +14,59 @@ export class TimeSlot {
       return `${pp(this.startTime)} - ${pp(this.endTime)}`;
     }
   }
+  static allSlots() {
+    return [
+      new TimeSlot(8, 0),
+      new TimeSlot(8, 30),
+      new TimeSlot(9, 0),
+      new TimeSlot(9, 30),
+      new TimeSlot(10, 0),
+      new TimeSlot(10, 30),
+      new TimeSlot(11, 0),
+      new TimeSlot(11, 30),
+      new TimeSlot(12, 0),
+      new TimeSlot(12, 30),
+      new TimeSlot(13, 0),
+      new TimeSlot(13, 30),
+      new TimeSlot(14, 0),
+      new TimeSlot(14, 30),
+      new TimeSlot(15, 0),
+    ];
+  }
+
 }
 
 const timeslots = [
-  new TimeSlot('Thursday', 8, 0),
-  new TimeSlot('Thursday', 8, 30),
-  new TimeSlot('Thursday', 9, 0),
-  new TimeSlot('Thursday', 9, 30),
-  new TimeSlot('Thursday', 10, 0),
-  new TimeSlot('Thursday', 10, 30),
-  new TimeSlot('Thursday', 11, 0),
-  new TimeSlot('Thursday', 11, 30),
-  new TimeSlot('Thursday', 12, 0),
-  new TimeSlot('Thursday', 12, 30),
-  new TimeSlot('Thursday', 13, 0),
-  new TimeSlot('Thursday', 13, 30),
-  new TimeSlot('Thursday', 14, 0),
-  new TimeSlot('Thursday', 14, 30),
-  new TimeSlot('Thursday', 15, 0),
-  new TimeSlot('Friday', 8, 0),
-  new TimeSlot('Friday', 8, 30),
-  new TimeSlot('Friday', 9, 0),
-  new TimeSlot('Friday', 9, 30),
-  new TimeSlot('Friday', 10, 0),
-  new TimeSlot('Friday', 10, 30),
-  new TimeSlot('Friday', 11, 0),
-  new TimeSlot('Friday', 11, 30),
-  new TimeSlot('Friday', 12, 0),
-  new TimeSlot('Friday', 12, 30),
-  new TimeSlot('Friday', 13, 0),
-  new TimeSlot('Friday', 13, 30),
-  new TimeSlot('Friday', 14, 0),
-  new TimeSlot('Friday', 14, 30),
-  new TimeSlot('Friday', 15, 0),
+  new TimeSlot(8, 0, 'Thursday'),
+  new TimeSlot(8, 30, 'Thursday'),
+  new TimeSlot(9, 0, 'Thursday'),
+  new TimeSlot(9, 30, 'Thursday'),
+  new TimeSlot(10, 0, 'Thursday'),
+  new TimeSlot(10, 30, 'Thursday'),
+  new TimeSlot(11, 0, 'Thursday'),
+  new TimeSlot(11, 30, 'Thursday'),
+  new TimeSlot(12, 0, 'Thursday'),
+  new TimeSlot(12, 30, 'Thursday'),
+  new TimeSlot(13, 0, 'Thursday'),
+  new TimeSlot(13, 30, 'Thursday'),
+  new TimeSlot(14, 0, 'Thursday'),
+  new TimeSlot(14, 30, 'Thursday'),
+  new TimeSlot(15, 0, 'Thursday'),
+  new TimeSlot(8, 0, 'Friday'),
+  new TimeSlot(8, 30, 'Friday'),
+  new TimeSlot(9, 0, 'Friday'),
+  new TimeSlot(9, 30, 'Friday'),
+  new TimeSlot(10, 0, 'Friday'),
+  new TimeSlot(10, 30, 'Friday'),
+  new TimeSlot(11, 0, 'Friday'),
+  new TimeSlot(11, 30, 'Friday'),
+  new TimeSlot(12, 0, 'Friday'),
+  new TimeSlot(12, 30, 'Friday'),
+  new TimeSlot(13, 0, 'Friday'),
+  new TimeSlot(13, 30, 'Friday'),
+  new TimeSlot(14, 0, 'Friday'),
+  new TimeSlot(14, 30, 'Friday'),
+  new TimeSlot(15, 0, 'Friday'),
 ];
 
 export default timeslots;

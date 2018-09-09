@@ -1,4 +1,52 @@
 import Time from './Time'
+import { TimeSlot } from './timeslots'
+
+export function printMarkdownSchedule(timeslots) {
+
+  /* 
+   * Preparation
+   */
+  let scheduleTemplate = `Time`;
+  let allSlots = TimeSlot.allSlots()
+  let uniqueDays = timeslots.reduce( (days, slot) => {
+    if(!days.includes(slot.day)) {
+      days.push(slot.day)
+    }
+    return days;
+  }, [])
+
+  /* 
+   * Set up the template heading in Markdown
+   */
+
+  // Add days to template
+  uniqueDays.forEach((day) => {
+    scheduleTemplate += `|${day}`;
+  })
+
+  scheduleTemplate += '|\n'
+
+  uniqueDays.forEach( day => {
+    scheduleTemplate += '|---'
+  })
+
+  scheduleTemplate += '|\n'
+
+  /* 
+   * Logic for populating the template
+   */
+
+
+
+}
+
+
+
+
+
+
+
+
 
 export function strf(obj) {
   return JSON.stringify(obj, null, 2);
