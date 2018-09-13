@@ -72,6 +72,24 @@ class SharedText extends Course {
   }
 }
 
+class Lunch extends Course {
+  constructor(startHour, startMinute, duration = 30) {
+    super("SharedText", startHour, startMinute, duration);
+  }
+}
+
+
+let Lehman = {
+  name: "Lehman",
+  courses: [
+    new Wheatley(9, 0),
+    new SharedText(9, 50),
+    new Lunch(10, 15),
+    new Reading(11, 0),
+    new Writing(2, 25),
+  ]
+}
+
 let Hampton = {
   name: "Hampton",
   courses: [
@@ -115,7 +133,7 @@ let Albany = {
 };
 
 // 6 schools with 4 courses each
-colleges.push(Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
+colleges.push(Lehman, Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
 // Shuffle colleges to remove bias a bit
 // colleges.shuffle();
