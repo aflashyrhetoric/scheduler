@@ -143,6 +143,8 @@ let collegeCourseMap = colleges.map(college => {
 });
 
 let slotCount = 0
+let currentDay = ''
+let dailyRoster = []
 
 // For each time slot,
 timeslots.forEach(slot => {
@@ -152,6 +154,12 @@ timeslots.forEach(slot => {
   slot.groupIsBooked = false;
   slot.maxGroupSize;
   slot.scheduledStudents = [];
+
+  // if it's a new day, reset currentDay and dailyRoster
+  if(currentDay !== slot.day) {
+    currentDay = slot.day
+    dailyRoster = []
+  } 
 
   // Find the current courses
   collegeCourseMap.forEach(college => {
@@ -192,7 +200,7 @@ timeslots.forEach(slot => {
     let hasAlreadyScheduledASlot = false;
     let currentGroupSize = slot.scheduledStudents.length;
     let studentIsNotFullyScheduled =
-      student.mandates.filter(mandate => mandate.scheduled).length === 0;
+      student.mandates.filter(mandate => mandate.scheduled).length >= 0;
     let studentRequiresSoloGroup =
       student.mandates.filter(mandate => mandate.groupLimit == 1).length > 0;
     let studentIsInSameSchoolAsAnyScheduledStudents = false;
@@ -237,11 +245,13 @@ timeslots.forEach(slot => {
           if (
             currentGroupSize + 1 <= mandate.groupLimit &&
             currentGroupSize <= slot.maxGroupSize &&
+            !dailyRoster.includes(student) &&
             !hasAlreadyScheduledASlot
           ) {
             // console.log(`${student.name} - ${studentRequiresSoloGroup}`)
             // Book the kid to the group
             slot.scheduledStudents.push(student);
+            dailyRoster.push(student)
 
             if (slot.scheduledStudents.length == mandate.groupLimit) {
               slot.groupIsBooked = true;
@@ -265,6 +275,7 @@ timeslots.forEach(slot => {
       currentGroupSize == 0 &&
       studentRequiresSoloGroup &&
       studentIsNotFullyScheduled &&
+      !dailyRoster.includes(student) &&
       !hasAlreadyScheduledASlot
     ) {
       // ...book it!
@@ -293,6 +304,6 @@ timeslots.forEach(slot => {
 }); // End of timeslot loop
 
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
-printMarkdownSchedule(timeslots);
+  printMarkdownSchedule(timeslots);
 // str(timeslots)
 // str(studentList)
