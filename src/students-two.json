@@ -1,0 +1,174 @@
+{
+  "students": [
+    {
+      "name": "Rivah Church",
+      "college": "USC",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Salia Fofana",
+      "college": "Lehman",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Jacob Hernandez",
+      "college": "Hampton",
+      "mandates": [
+        {
+          "groupLimit": 1,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Heaven Rivera",
+      "college": "Hampton",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Dallas Wiggins",
+      "college": "Pittsburgh",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Hamani Adam",
+      "college": "Maryland",
+      "mandates": [
+        {
+          "groupLimit": 1,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Shawn Bradberry",
+      "college": "USC",
+      "mandates": [
+        {
+          "groupLimit": 1,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Coleman Brown",
+      "college": "Albany",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Jordan Djomambo",
+      "college": "Albany",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Christian Fraser",
+      "college": "USC",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Luis Garcia",
+      "college": "Maryland",
+      "mandates": [
+        {
+          "groupLimit": 1,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Kajohn Grandison",
+      "college": "USC",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        },
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    },
+    {
+      "name": "Andrew Hood",
+      "college": "USC",
+      "mandates": [
+        {
+          "groupLimit": 2,
+          "scheduled": false
+        }
+      ]
+    }
+  ]
+}

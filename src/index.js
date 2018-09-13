@@ -1,4 +1,4 @@
-import studentRoster from "./students";
+import studentRoster from "./students-two";
 import timeslots from "./timeslots";
 import Time from './Time';
 import {
@@ -13,6 +13,30 @@ import {
 } from "./functions";
 
 let studentList = studentRoster.students;
+
+studentList = studentList.concat(
+  {
+    "name": "Jayden Linton",
+    "college": "F and M",
+    "mandates": [
+      {
+        "groupLimit": 2,
+        "scheduled": false,
+      }
+    ]
+  },
+  {
+    "name": "Zachary Wilkins",
+    "college": "F and M",
+    "mandates": [
+      {
+        "groupLimit": 2,
+        "scheduled": false,
+      }
+    ]
+  }
+)
+
 let colleges = [];
 
 Array.prototype.shuffle = function() {
@@ -91,6 +115,16 @@ let Lehman = {
   ]
 }
 
+let FandM = {
+  name: "F and M",
+  courses: [
+    new Wheatley(9, 25, 45),
+    new Lunch(10, 15),
+    new Reading(12, 0),
+    new Writing(1, 20, 40),
+  ]
+}
+
 let Hampton = {
   name: "Hampton",
   courses: [
@@ -134,7 +168,7 @@ let Albany = {
 };
 
 // 6 schools with 4 courses each
-colleges.push(Lehman, Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
+colleges.push(Lehman, FandM, Hampton, Pittsburgh, Temple, Maryland, USC, Albany);
 
 // Shuffle colleges to remove bias a bit
 // colleges.shuffle();
