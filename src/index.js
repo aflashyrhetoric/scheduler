@@ -93,8 +93,8 @@ let Lehman = {
 let Hampton = {
   name: "Hampton",
   courses: [
-    // new Wheatley(8, 10),
-    new Wheatley(8, 0),
+    new Wheatley(8, 10),
+    // new Wheatley(8, 0),
     new Reading(11, 0),
     new Writing(12, 0),
     new SharedText(14, 10)
@@ -128,7 +128,7 @@ let Albany = {
     new Wheatley(8, 0),
     new Reading(11, 0),
     new Writing(13, 15, 50),
-    new SharedText(15, 5, 30)
+    new SharedText(15, 0, 30)
   ]
 };
 
