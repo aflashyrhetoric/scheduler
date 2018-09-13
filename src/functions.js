@@ -1,6 +1,31 @@
 import Time from "./Time";
 import { TimeSlot } from "./timeslots";
 
+export function printUnsatisfiedMandates(studentList) {
+  // Filter out students who have any unsatisfied mandates at all
+  let students = studentList.filter(student => !student.mandates.every(mandate => mandate.scheduled))
+
+  // Filter out satisfied mandates, leaving only unsatisfied
+  students.forEach(student => {
+    student.mandates = student.mandates.filter(mandate => !mandate.scheduled)
+    let studentMandateTemplate = ``
+    student.mandates.forEach(mandate => studentMandateTemplate += `${mandate.groupLimit}x30, `)
+    student.mandates = studentMandateTemplate.slice(0, studentMandateTemplate.length - 2)
+  })
+
+  let scheduleTemplate = "## Students with unsatisfied mandates\n"
+  scheduleTemplate += `|Student|College|Mandates`;
+  scheduleTemplate = closeRow(scheduleTemplate);
+  scheduleTemplate += "|---|---|---|---";
+  scheduleTemplate = closeRow(scheduleTemplate);
+
+  students.forEach(student => {
+    scheduleTemplate+= `|${student.name}|${student.college}|${student.mandates}`
+    scheduleTemplate = closeRow(scheduleTemplate);
+  })
+
+  console.log(scheduleTemplate)
+}
 export function printMarkdownSchedule(timeslots) {
   /* 
    * Preparation
@@ -28,7 +53,8 @@ export function printMarkdownSchedule(timeslots) {
    * Set up the template heading in Markdown
    */
 
-  let scheduleTemplate = `Time`;
+  let scheduleTemplate = "## Tentative Schedule\n"
+  scheduleTemplate += `Time`;
   // Add days to template
   uniqueDays.forEach(day => {
     scheduleTemplate += `|${day}`;
