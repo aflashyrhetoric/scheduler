@@ -29,20 +29,6 @@
       ]
     },
     {
-      "name": "Jacob Hernandez",
-      "college": "Hampton",
-      "mandates": [
-        {
-          "groupLimit": 1,
-          "scheduled": false
-        },
-        {
-          "groupLimit": 2,
-          "scheduled": false
-        }
-      ]
-    },
-    {
       "name": "Heaven Rivera",
       "college": "Hampton",
       "mandates": [

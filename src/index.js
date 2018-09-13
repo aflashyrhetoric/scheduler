@@ -17,8 +17,12 @@ let studentList = studentRoster.students;
 studentList = studentList.concat(
   {
     "name": "Jayden Linton",
-    "college": "F and M",
+    "college": "FnM",
     "mandates": [
+      {
+        "groupLimit": 1,
+        "scheduled": false,
+      },
       {
         "groupLimit": 2,
         "scheduled": false,
@@ -27,8 +31,12 @@ studentList = studentList.concat(
   },
   {
     "name": "Zachary Wilkins",
-    "college": "F and M",
+    "college": "FnM",
     "mandates": [
+      {
+        "groupLimit": 1,
+        "scheduled": false,
+      },
       {
         "groupLimit": 2,
         "scheduled": false,
@@ -68,7 +76,7 @@ class Course {
 
     return (
       timeSlotStart >= startTimeInSeconds &&
-      timeSlotEnd <= endTimeInSeconds
+      endTimeInSeconds >= timeSlotEnd
     );
   }
 }
@@ -82,6 +90,12 @@ class Wheatley extends Course {
 class Reading extends Course {
   constructor(startHour, startMinute, duration = 60 ) {
     super("Reading", startHour, startMinute, duration);
+  }
+}
+
+class ReadingMastery extends Course {
+  constructor(startHour, startMinute, duration = 30 ) {
+    super("ReadingMastery", startHour, startMinute, duration);
   }
 }
 
@@ -99,7 +113,7 @@ class SharedText extends Course {
 
 class Lunch extends Course {
   constructor(startHour, startMinute, duration = 30) {
-    super("SharedText", startHour, startMinute, duration);
+    super("Lunch", startHour, startMinute, duration);
   }
 }
 
@@ -116,11 +130,11 @@ let Lehman = {
 }
 
 let FandM = {
-  name: "F and M",
+  name: "FnM",
   courses: [
     new Wheatley(9, 25, 45),
-    new Lunch(10, 15),
-    new Reading(12, 0),
+    new Reading(11, 0),
+    new ReadingMastery(12, 0),
     new Writing(1, 20, 40),
   ]
 }
