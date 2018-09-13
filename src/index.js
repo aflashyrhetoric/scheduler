@@ -37,12 +37,13 @@ class Course {
 
   fitsIn(timeSlot) {
     let timeSlotStart = timeSlot.startTime.convertToSeconds();
+    let timeSlotEnd = timeSlot.endTime.convertToSeconds();
     let startTimeInSeconds = this.startTime.convertToSeconds();
     let endTimeInSeconds = this.endTime.convertToSeconds();
-    let timeSlotEnd = timeSlot.endTime.convertToSeconds();
 
     return (
-      timeSlotStart >= startTimeInSeconds && timeSlotEnd <= endTimeInSeconds
+      timeSlotStart >= startTimeInSeconds &&
+      timeSlotEnd <= endTimeInSeconds
     );
   }
 }
@@ -74,10 +75,11 @@ class SharedText extends Course {
 let Hampton = {
   name: "Hampton",
   courses: [
-    new Wheatley(8, 10),
+    // new Wheatley(8, 10),
+    new Wheatley(8, 0),
     new Reading(11, 0),
     new Writing(12, 0),
-    new SharedText(14, 15)
+    new SharedText(14, 10)
   ]
 };
 let Pittsburgh = Object.assign({}, Hampton);
@@ -140,6 +142,8 @@ let collegeCourseMap = colleges.map(college => {
   };
 });
 
+let slotCount = 0
+
 // For each time slot,
 timeslots.forEach(slot => {
   let currentCollegeCourseMap = [];
@@ -160,7 +164,12 @@ timeslots.forEach(slot => {
         courses: currentCollegeCourses
       });
     }
+    // if(slot.day === 'Friday') {
+    //   console.log(slot.startTime)
+    // }
   });
+
+  // console.log(slot.startTime, currentCollegeCourseMap);
 
   // str(currentCollegeCourses)
   // console.log(`${slot.toString()}-${currentCollegeCourses}`)
@@ -175,56 +184,41 @@ timeslots.forEach(slot => {
       ...studentList.filter(student => student.college == course.college)
     );
   });
-  console.log(`${slot.toString()}-${strf(currentCollegeCourseMap)}`)
+  // console.log(`${slot.toString()}-${strf(currentCollegeCourseMap)}`)
   // console.log(studentsInCurrentIterationCollege.map(student => student.name))
 
   // For each college kid, assign roles
   studentsInCurrentIterationCollege.forEach(student => {
     let hasAlreadyScheduledASlot = false;
     let currentGroupSize = slot.scheduledStudents.length;
-    const studentIsNotFullyScheduled =
+    let studentIsNotFullyScheduled =
       student.mandates.filter(mandate => mandate.scheduled).length === 0;
-    const studentRequiresSoloGroup =
+    let studentRequiresSoloGroup =
       student.mandates.filter(mandate => mandate.groupLimit == 1).length > 0;
+    let studentIsInSameSchoolAsAnyScheduledStudents = false;
+    if(slot.scheduledStudents.length === 0) {
+      // If no students, return true
+      studentIsInSameSchoolAsAnyScheduledStudents = true;
+    } else {
+      studentIsInSameSchoolAsAnyScheduledStudents =
+        slot.scheduledStudents.every(scheduledStudent => student.college === scheduledStudent.college)
+    }
+
 
     // console.log(`${student.name} - ${!student.mandates.filter(mandate => mandate.scheduled).length === 0}`)
 
     /* 
-     * FOR SOLO SESSIONS
-     */
-    if (
-      currentGroupSize == 0 &&
-      studentRequiresSoloGroup &&
-      studentIsNotFullyScheduled &&
-      !hasAlreadyScheduledASlot
-    ) {
-      // ...book it!
-      student.mandates
-        .filter(mandate => !mandate.scheduled)
-        .filter(mandate => mandate.groupLimit === 1)
-        .forEach(mandate => {
-          // Book the kid to the group
-          slot.scheduledStudents.push(student);
-
-          // Satisfy one of the kid's requirements
-          mandate.scheduled = true;
-
-          // Prevent duplicate booking
-          hasAlreadyScheduledASlot = true;
-
-          slot.groupIsBooked = true;
-        });
-    }
-
-    /* 
      * FOR BOOKING GROUP SESSIONS
      */
+    // console.log(`${student.name} booked? ${studentIsNotFullyScheduled}`)
+    // console.log(slotCount);
+    // console.log(`${student.name} - ${strf(student.mandates)}`)
     if (
       studentIsNotFullyScheduled &&
+      studentIsInSameSchoolAsAnyScheduledStudents &&
       !hasAlreadyScheduledASlot &&
       !slot.groupIsBooked
     ) {
-      // console.log(`${student.name}`)
 
       slot.maxGroupSize = Math.min(
         ...flatten(
@@ -258,10 +252,44 @@ timeslots.forEach(slot => {
 
             // Prevent duplicate booking
             hasAlreadyScheduledASlot = true;
+          // console.log(`${student.name} - ${strf(student.mandates)}`)
           }
+          // console.log(mandate);
         });
     }
+
+    /* 
+     * FOR SOLO SESSIONS
+     */
+    if (
+      currentGroupSize == 0 &&
+      studentRequiresSoloGroup &&
+      studentIsNotFullyScheduled &&
+      !hasAlreadyScheduledASlot
+    ) {
+      // ...book it!
+      student.mandates
+        .filter(mandate => !mandate.scheduled)
+        .filter(mandate => mandate.groupLimit === 1)
+        .forEach(mandate => {
+          // Book the kid to the group
+          slot.scheduledStudents.push(student);
+
+          // Satisfy one of the kid's requirements
+          mandate.scheduled = true;
+
+          // Prevent duplicate booking
+          hasAlreadyScheduledASlot = true;
+
+          slot.groupIsBooked = true;
+        });
+    }
+
   }); // End of studentsInCurrentIterationCollege forEach
+  // if(slotCount === 0) {
+  //   console.log(studentsInCurrentIterationCollege);
+  // }
+  slotCount++;
 }); // End of timeslot loop
 
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
