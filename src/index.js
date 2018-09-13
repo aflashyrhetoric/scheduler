@@ -322,6 +322,10 @@ timeslots.forEach(slot => {
 }); // End of timeslot loop
 
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
-  printMarkdownSchedule(timeslots);
+// printMarkdownSchedule(timeslots);
 // str(timeslots)
 // str(studentList)
+str(studentList.filter(student => {
+  return !student.mandates.every(mandate => mandate.scheduled)
+}))
+
