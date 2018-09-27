@@ -1,19 +1,26 @@
-.PHONY: dev pug
-
-pug:
-	$(PUG_CMD) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/index.pug
-
-default:
-
-dev:
-	pug 
-
+# cmd
 PUG_CMD = $(NODE_BIN_DIR)/pug
+STYLUS_CMD = $(NODE_BIN_DIR)/stylus
 
+# dir
 NODE_MODULE_DIR := $(realpath node_modules)
 NODE_BIN_DIR := $(realpath $(NODE_MODULE_DIR)/.bin)
-
-BUILD_DIR := dist
 VIEW_DIR := $(realpath views)
+BUILD_DIR := dist
 
-# $(NODE_BIN_DIR)/pug $(PUG_COMMON_FLAGS) $(PUG_FLAGS) --out $(BUILD_DIR) $(realpath src)/index.pug
+.PHONY: dev pug stylus
+
+pug:
+	$(PUG_CMD) 
+
+stylus:
+	$(stylus) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/index.pug
+
+default:
+	pug
+
+students:
+	$(PUG_CMD) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/students.pug
+
+dev:
+	$(PUG_CMD) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/index.pug --obj '{hi:"bye"}'
