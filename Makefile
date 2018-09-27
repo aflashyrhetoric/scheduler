@@ -8,16 +8,16 @@ NODE_BIN_DIR := $(realpath $(NODE_MODULE_DIR)/.bin)
 VIEW_DIR := $(realpath views)
 BUILD_DIR := dist
 
-.PHONY: dev pug stylus
+.PHONY: dev pug stylus students
+
+default:
+	pug
 
 pug:
 	$(PUG_CMD) 
 
 stylus:
-	$(stylus) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/index.pug
-
-default:
-	pug
+	$(STYLUS_CMD) --watch --out "dist" "./src/styles.styl"
 
 students:
 	$(PUG_CMD) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/students.pug
