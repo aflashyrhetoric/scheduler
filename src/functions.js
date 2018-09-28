@@ -3,28 +3,37 @@ import { TimeSlot } from "./timeslots";
 
 export function printUnsatisfiedMandates(studentList) {
   // Filter out students who have any unsatisfied mandates at all
-  let students = studentList.filter(student => !student.mandates.every(mandate => mandate.scheduled))
+  let students = studentList.filter(
+    student => !student.mandates.every(mandate => mandate.scheduled)
+  );
 
   // Filter out satisfied mandates, leaving only unsatisfied
   students.forEach(student => {
-    student.mandates = student.mandates.filter(mandate => !mandate.scheduled)
-    let studentMandateTemplate = ``
-    student.mandates.forEach(mandate => studentMandateTemplate += `${mandate.groupLimit}x30, `)
-    student.mandates = studentMandateTemplate.slice(0, studentMandateTemplate.length - 2)
-  })
+    student.mandates = student.mandates.filter(mandate => !mandate.scheduled);
+    let studentMandateTemplate = ``;
+    student.mandates.forEach(
+      mandate => (studentMandateTemplate += `${mandate.groupLimit}x30, `)
+    );
+    student.mandates = studentMandateTemplate.slice(
+      0,
+      studentMandateTemplate.length - 2
+    );
+  });
 
-  let scheduleTemplate = "## Students with unsatisfied mandates\n"
+  let scheduleTemplate = "## Students with unsatisfied mandates\n";
   scheduleTemplate += `|Student|College|Mandates`;
   scheduleTemplate = closeRow(scheduleTemplate);
   scheduleTemplate += "|---|---|---|---";
   scheduleTemplate = closeRow(scheduleTemplate);
 
   students.forEach(student => {
-    scheduleTemplate+= `|${student.name}|${student.college}|${student.mandates}`
+    scheduleTemplate += `|${student.name}|${student.college}|${
+      student.mandates
+    }`;
     scheduleTemplate = closeRow(scheduleTemplate);
-  })
+  });
 
-  console.log(scheduleTemplate)
+  console.log(scheduleTemplate);
 }
 export function printMarkdownSchedule(timeslots) {
   /* 
@@ -38,22 +47,22 @@ export function printMarkdownSchedule(timeslots) {
     return days;
   }, []);
 
-  // An array of each day's slots, starting with the template "8 - 9AM" 
-  let uniqueDayTimeSlots = []
-  uniqueDayTimeSlots.push(allSlots)
+  // An array of each day's slots, starting with the template "8 - 9AM"
+  let uniqueDayTimeSlots = [];
+  uniqueDayTimeSlots.push(allSlots);
 
-  uniqueDays.forEach( day => {
-    let dailySchedule = timeslots.filter( slot => {
-      return day === slot.day 
-    })
-    uniqueDayTimeSlots.push(dailySchedule)
-  })
+  uniqueDays.forEach(day => {
+    let dailySchedule = timeslots.filter(slot => {
+      return day === slot.day;
+    });
+    uniqueDayTimeSlots.push(dailySchedule);
+  });
 
   /* 
    * Set up the template heading in Markdown
    */
 
-  let scheduleTemplate = "## Tentative Schedule\n"
+  let scheduleTemplate = "## Tentative Schedule\n";
   scheduleTemplate += `Time`;
   // Add days to template
   uniqueDays.forEach(day => {
@@ -66,62 +75,50 @@ export function printMarkdownSchedule(timeslots) {
   });
   scheduleTemplate = closeRow(scheduleTemplate);
 
-
   /* 
    * Logic for populating the template
    */
 
-  // uniqueDayTimeSlots.forEach(row => {
-  //   scheduleTemplate = addColumn(scheduleTemplate, dayRow[row]);
-  //   scheduleTemplate = closeRow(scheduleTemplate)
-  // })
-
   for (let row = 0; row < allSlots.length; row++) {
-    // let dayRow = uniqueDayTimeSlots[row];
 
-    for( let column = 0; column < uniqueDayTimeSlots.length; column ++) {
+    for (let column = 0; column < uniqueDayTimeSlots.length; column++) {
       let studentTextTemplate;
-      let areScheduledStudents = uniqueDayTimeSlots[column][row].scheduledStudents;
-      if(areScheduledStudents) {
-        let studentNames = uniqueDayTimeSlots[column][row].scheduledStudents.map(student => student.name)
-        studentTextTemplate = `${studentNames.join(', ')}`;
+      let areScheduledStudents =
+        uniqueDayTimeSlots[column][row].scheduledStudents;
+      if (areScheduledStudents) {
+        let studentNames = uniqueDayTimeSlots[column][
+          row
+        ].scheduledStudents.map(student => student.name);
+        studentTextTemplate = `${studentNames.join(", ")}`;
       }
 
-      let columnText = areScheduledStudents ? studentTextTemplate : uniqueDayTimeSlots[column][row]
+      let columnText = areScheduledStudents
+        ? studentTextTemplate
+        : uniqueDayTimeSlots[column][row];
 
-      if(columnText == '') {
-        columnText = 'No Students Available'
+      if (columnText == "") {
+        columnText = "No Students Available";
       }
 
-      scheduleTemplate = addColumn(scheduleTemplate, columnText ? columnText : uniqueDayTimeSlots[column][row]);
+      scheduleTemplate = addColumn(
+        scheduleTemplate,
+        columnText ? columnText : uniqueDayTimeSlots[column][row]
+      );
     }
 
-    scheduleTemplate = closeRow(scheduleTemplate)
+    scheduleTemplate = closeRow(scheduleTemplate);
   }
 
-  console.log(scheduleTemplate)
+  console.log(scheduleTemplate);
   // str(uniqueDayTimeSlots[1][1])
 }
 
 function addColumn(template, text) {
-  return template += `| ${text} `
+  return (template += `| ${text} `);
 }
 function closeRow(template) {
-  return template += `|\n`
+  return (template += `|\n`);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export function strf(obj) {
   return JSON.stringify(obj, null, 2);

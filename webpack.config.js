@@ -4,6 +4,7 @@ const webpack = require('webpack');
 
 let config = {
   mode: "development",
+  target: "node",
   watch: true,
   watchOptions: {
     ignored: /node_modules/
@@ -48,5 +49,8 @@ if (process.env.NODE_ENV !== 'production') {
     new webpack.optimize.AggressiveMergingPlugin()
   ]);
 }
+
+// Fix the 'can't resolve "fs"' error
+config.node = { fs: 'empty' };
 
 module.exports = config

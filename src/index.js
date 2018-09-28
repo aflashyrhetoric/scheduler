@@ -1,6 +1,7 @@
 import studentRoster from "./students-two";
 import timeslots from "./timeslots";
 import Time from './Time';
+const fs = require('fs');
 import {
   strf,
   str,
@@ -370,9 +371,16 @@ timeslots.forEach(slot => {
   slotCount++;
 }); // End of timeslot loop
 
+// console.log(timeslots);
+// console.log(fs)
+
+fs.writeFile("data/student-data.json", strf(timeslots), err => {
+  if (err) throw err;
+  console.log('File successfully written to disk');
+})  
 // str(timeslots.filter(slot => slot.scheduledStudents.length > 0 ));
-printMarkdownSchedule(timeslots);
-printUnsatisfiedMandates(studentList);
+// printMarkdownSchedule(timeslots);
+// printUnsatisfiedMandates(studentList);
 // str(timeslots)
 // str(studentList)
 

@@ -1,0 +1,744 @@
+[
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 8,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 8,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Rivah Church",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Shawn Bradberry",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 8,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 9,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [
+      {
+        "name": "Heaven Rivera",
+        "college": "Hampton",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 9,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 9,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [
+      {
+        "name": "Salia Fofana",
+        "college": "Lehman",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 9,
+      "minutes": 45
+    },
+    "endTime": {
+      "hours": 10,
+      "minutes": 15
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Christian Fraser",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Kajohn Grandison",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": false
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 10,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 10,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 10,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 11,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 11,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 11,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Jayden Linton",
+        "college": "FnM",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Zachary Wilkins",
+        "college": "FnM",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 11,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 12,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [
+      {
+        "name": "Dallas Wiggins",
+        "college": "Pittsburgh",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 12,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 12,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Hamani Adam",
+        "college": "Maryland",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Luis Garcia",
+        "college": "Maryland",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 12,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 13,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 13,
+      "minutes": 15
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 45
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Coleman Brown",
+        "college": "Albany",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Jordan Djomambo",
+        "college": "Albany",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 14,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 14,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 14,
+      "minutes": 10
+    },
+    "endTime": {
+      "hours": 14,
+      "minutes": 40
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Thursday",
+    "startTime": {
+      "hours": 15,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 15,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 8,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 8,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Rivah Church",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Christian Fraser",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 8,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 9,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 9,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 9,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [
+      {
+        "name": "Salia Fofana",
+        "college": "Lehman",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 9,
+      "minutes": 45
+    },
+    "endTime": {
+      "hours": 10,
+      "minutes": 15
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Shawn Bradberry",
+        "college": "USC",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 10,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 10,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 10,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 11,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 11,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 11,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Jayden Linton",
+        "college": "FnM",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 11,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 12,
+      "minutes": 0
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Zachary Wilkins",
+        "college": "FnM",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 12,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 12,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Hamani Adam",
+        "college": "Maryland",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 12,
+      "minutes": 30
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 0
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 13,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 13,
+      "minutes": 15
+    },
+    "endTime": {
+      "hours": 13,
+      "minutes": 45
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Luis Garcia",
+        "college": "Maryland",
+        "mandates": [
+          {
+            "groupLimit": 1,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 1
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 14,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 14,
+      "minutes": 30
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": []
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 14,
+      "minutes": 10
+    },
+    "endTime": {
+      "hours": 14,
+      "minutes": 40
+    },
+    "groupIsBooked": false,
+    "scheduledStudents": [],
+    "maxGroupSize": 2
+  },
+  {
+    "day": "Friday",
+    "startTime": {
+      "hours": 15,
+      "minutes": 0
+    },
+    "endTime": {
+      "hours": 15,
+      "minutes": 30
+    },
+    "groupIsBooked": true,
+    "scheduledStudents": [
+      {
+        "name": "Coleman Brown",
+        "college": "Albany",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      },
+      {
+        "name": "Jordan Djomambo",
+        "college": "Albany",
+        "mandates": [
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          },
+          {
+            "groupLimit": 2,
+            "scheduled": true
+          }
+        ]
+      }
+    ],
+    "maxGroupSize": 2
+  }
+]
