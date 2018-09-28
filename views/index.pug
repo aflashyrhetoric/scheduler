@@ -1,12 +1,28 @@
 doctype html
 
+- var slots = timeslots
+
 html
   head
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css")
     link(rel="stylesheet", href="styles.css")
     title= Scheduler
   body
-    h1 KIPP Students App
-    p #{timeslots}
-    block students
+    .hero.is-dark
+      .container
+        .hero-body
+          h1.title KIPP Student Schedule
+          h2.subtitle Hourly overview
+    .section
+      .level
+        h3.title Student List
+      ul
+        if slots
+          each val in slots
+            - var studentRow = ' ';
+            each student in val.scheduledStudents
+              if student
+              - studentRow += `${student.name} `
+            li= studentRow
 
 
