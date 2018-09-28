@@ -1,7 +1,5 @@
 doctype html
 
-- var slots = timeslots
-
 html
   head
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css")
@@ -14,15 +12,21 @@ html
           h1.title KIPP Student Schedule
           h2.subtitle Hourly overview
     .section
-      .level
-        h3.title Student List
-      ul
-        if slots
-          each val in slots
-            - var studentRow = ' ';
-            each student in val.scheduledStudents
-              if student
-              - studentRow += `${student.name} `
-            li= studentRow
+      table.table
+        thead
+          tr
+            th Day
+            th Scheduled Students
+        tbody
+          if timeslots 
+            each val in timeslots 
+              tr
+                td= val.day
+                - var studentRow = '';
+                each student in val.scheduledStudents
+                  if student
+                    - studentRow += student.name + ', '
+                - studentRow = studentRow.trim().substr(0, studentRow.length - 2)
+                td= studentRow
 
 
