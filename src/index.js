@@ -1,7 +1,7 @@
+const fs = require('fs');
 import studentRoster from "./students-two";
 import timeslots from "./timeslots";
 import Time from './Time';
-const fs = require('fs');
 import {
   strf,
   str,
