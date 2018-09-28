@@ -11,8 +11,13 @@ VIEW_DIR := $(realpath views)
 SRC_DIR := $(realpath src)
 BUILD_DIR := dist
 
-PUG_FLAGS := --basedir $(VIEW_DIR) --watch $(VIEW_DIR)/**.pug --out $(BUILD_DIR) --obj '{hi:"bye"}' $(VIEW_DIR)/**.pug
+# Data
+STUDENT_DATA = `data/student-data.json`
+
+# Flags
+PUG_FLAGS := --basedir $(VIEW_DIR) --watch $(VIEW_DIR)/**.pug --out $(BUILD_DIR) --obj `cat $(STUDENT_DATA)` $(VIEW_DIR)/**.pug
 STYLUS_FLAGS := --watch --out "dist" "./src/styles.styl"
+
 
 ###
 

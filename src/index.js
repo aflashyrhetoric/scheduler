@@ -374,7 +374,8 @@ timeslots.forEach(slot => {
 // console.log(timeslots);
 // console.log(fs)
 
-fs.writeFile("data/student-data.json", strf(timeslots), err => {
+// Save student data to file
+fs.writeFile("data/student-data.json", strf({timeslots}), err => {
   if (err) throw err;
   console.log('File successfully written to disk');
 })  
