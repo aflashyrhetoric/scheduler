@@ -1,3 +1,5 @@
+.PHONY: dev pug stylus pages styles
+
 # cmd
 PUG_CMD = $(NODE_BIN_DIR)/pug
 STYLUS_CMD = $(NODE_BIN_DIR)/stylus
@@ -10,20 +12,25 @@ SRC_DIR := $(realpath src)
 BUILD_DIR := dist
 
 PUG_FLAGS := --basedir $(VIEW_DIR) --watch $(VIEW_DIR)/**.pug --out $(BUILD_DIR) --obj '{hi:"bye"}' $(VIEW_DIR)/**.pug
+STYLUS_FLAGS := --watch --out "dist" "./src/styles.styl"
 
-.PHONY: dev pug stylus students
+###
 
 default:
-	pug
+	make dev
 
-pug:
-	$(PUG_CMD) 
+pug: $(PUG_CMD)
 
-stylus:
-	$(STYLUS_CMD) --watch --out "dist" "./src/styles.styl"
+stylus: $(STYLUS_CMD)
 
 pages:
 	$(PUG_CMD) $(PUG_FLAGS)
 
+server:
+	php -S localhost:5000 -t dist
+
+styles:
+	$(STYLUS_CMD) $(STYLUS_FLAGS)
+
 dev:
-	$(PUG_CMD) --basedir $(VIEW_DIR) --out $(BUILD_DIR) $(VIEW_DIR)/index.pug --obj '{hi:"bye"}'
+	make pages & make server & make styles
